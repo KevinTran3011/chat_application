@@ -10,7 +10,8 @@ import {
   signoutFailure,
   signoutSuccess,
 } from "../../redux/slice/authSlice";
-import { auth } from "../../firebase";
+import { auth, db } from "../../firebase";
+
 import { DevTool } from "@hookform/devtools";
 import { Link } from "react-router-dom";
 
@@ -29,14 +30,22 @@ const LogIn = () => {
 
     try {
       dispatch(signinRequest());
-      const userCredential = await signInWithEmailAndPassword({
+      const userCredential = await signInWithEmailAndPassword(
         auth,
-        email: data.email,
-        password: data.password,
-      });
+        data.email,
+        data.password
+      );
       console.log(`Attempting to sign in user: ${userCredential}`);
 
-      dispatch(signinSuccess(userCredential));
+      // Extract only the necessary data
+      const userData = {
+        uid: userCredential.user.uid,
+        email: userCredential.user.email,
+        displayName: userCredential.user.displayName,
+      };
+
+      dispatch(signinSuccess(userData));
+      console.log("User logged in successfully");
       reset();
     } catch (err) {
       console.log(`Error while logging in user: ${err.message}`);

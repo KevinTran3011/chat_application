@@ -1,0 +1,31 @@
+body {
+  font-family: Plus Jakarta Sans;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 140%;
+  letter-spacing: 0.4;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.links_text {
+  font-size: 16px;
+  color: #47ace4;
+}
+
+.header {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.input_Form, .input_Form--header {
+  font-size: 21px;
+  font-weight: 600;
+}
+.input_Form--header {
+  font-size: 50px;
+}/*# sourceMappingURL=index.css.map */

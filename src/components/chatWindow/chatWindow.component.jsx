@@ -78,6 +78,7 @@ const ChatWindow = ({ currentUserId, targetUserId, targetUserName }) => {
           text: newMessage,
           timestamp: new Date(),
           userId: currentUserId,
+          targetUserId: targetUserId, // Add this line
         }
       );
 
@@ -89,7 +90,12 @@ const ChatWindow = ({ currentUserId, targetUserId, targetUserName }) => {
 
   return (
     <div className="chatWindow_container">
-      <h2> {targetUserName}</h2>
+      <div className="chatWindow_header">
+        <div className="chatWindow--title">
+          {" "}
+          <div className="header">{targetUserName}</div>
+        </div>
+      </div>
       {messages.map((message) => (
         <div key={message.id}>
           <p>{message.text}</p>

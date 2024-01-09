@@ -74,13 +74,7 @@ const SignUp = () => {
           {...register("password", { required: "Please enter password" })}
           placeholder="Password"
         />
-        <label htmlFor="username">Confirm Password</label>
 
-        <InputComponent
-          type="password"
-          {...register("password", { required: "Please enter password" })}
-          placeholder="confirm password"
-        />
         <ButtonComponent type="submit" className="signUp_button">
           Sign Up
         </ButtonComponent>

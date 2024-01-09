@@ -1,0 +1,19 @@
+@use "../abstract/colors" as *;
+
+.sideBar_container {
+  padding: 15px;
+  padding-left: 0px;
+}
+
+.sideBar_title {
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: $main_color;
+}
+
+.sideBar_body {
+  ul {
+    padding-left: 0rem;
+  }
+}

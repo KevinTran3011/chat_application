@@ -12,6 +12,7 @@ import { auth, db } from "../../firebase";
 import { DevTool } from "@hookform/devtools";
 // import InputComponent from "../Input/input.component";
 import ButtonComponent from "../Button/button.component";
+import InputComponent from "../Input/input.component";
 
 const SignUp = () => {
   const { register, handleSubmit, reset, control } = useForm();
@@ -40,7 +41,11 @@ const SignUp = () => {
       dispatch(signupSuccess());
       reset();
     } catch (err) {
-      console.error("Error in onSubmit:", err);
+      console.error("Error in onSubmit:", err.message);
+      if (err.message.includes("email-already-in-use")) {
+        alert("Email already in use");
+        reset();
+      }
       dispatch(signupFailure(err.message));
     }
   };
@@ -49,18 +54,18 @@ const SignUp = () => {
     <div className="signUp_container">
       <div className="signUp_title">Sign Up</div>
       <form className="signUp_form" onSubmit={handleSubmit(onSubmit)}>
-        <input
+        <InputComponent
           type="text"
           {...register("username", { required: "Please enter username" })}
           placeholder="Username"
         />
-        <input
+        <InputComponent
           type="email"
           {...register("email", { required: "Please enter email" })}
           placeholder="Email"
         />
 
-        <input
+        <InputComponent
           type="password"
           {...register("password", { required: "Please enter password" })}
           placeholder="Password"

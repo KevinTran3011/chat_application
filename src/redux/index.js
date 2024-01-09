@@ -1,18 +1,27 @@
-import { configureStore } from "@reduxjs/toolkit";
+// store.js
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import { persistStore, persistReducer } from "redux-persist";
+import storage from "redux-persist/lib/storage";
 import signupReducer from "./slice/signupSlice";
 import chatReducer from "./slice/chatSlice";
 import authReducer from "./slice/authSlice";
 
-console.log("signupReducer", signupReducer);
-console.log("chatReducer", chatReducer);
-console.log("authReducer", authReducer);
+const persistConfig = {
+  key: "root",
+  storage,
+};
 
-const store = configureStore({
-  reducer: {
+const persistedReducer = persistReducer(
+  persistConfig,
+  combineReducers({
     auth: authReducer,
     signUp: signupReducer,
     chat: chatReducer,
-  },
+  })
+);
+
+export const store = configureStore({
+  reducer: persistedReducer,
 });
 
-export default store;
+export const persistor = persistStore(store);

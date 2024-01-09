@@ -11,6 +11,7 @@ import {
   signoutSuccess,
 } from "../../redux/slice/authSlice";
 import { auth, db } from "../../firebase";
+import { useNavigate } from "react-router-dom";
 
 import { DevTool } from "@hookform/devtools";
 import { Link } from "react-router-dom";
@@ -24,6 +25,7 @@ const LogIn = () => {
     control,
   } = useForm();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     console.log("onSubmit called with data:", data);
@@ -41,11 +43,12 @@ const LogIn = () => {
       const userData = {
         uid: userCredential.user.uid,
         email: userCredential.user.email,
-        displayName: userCredential.user.displayName,
+        userName: userCredential.user.userName,
       };
 
       dispatch(signinSuccess(userData));
       console.log("User logged in successfully");
+      navigate(`/${userData.uid}/chats/`);
       reset();
     } catch (err) {
       console.log(`Error while logging in user: ${err.message}`);
@@ -55,18 +58,20 @@ const LogIn = () => {
   return (
     <div className="Login_container">
       <form className="Login_form" onSubmit={handleSubmit(onSubmit)}>
-        <InputComponent
-          ref={register}
+        <label htmlFor="email">Email</label>
+        <input
           type="email"
           placeholder="Email"
           {...register("email", { required: "Email is required" })}
-        ></InputComponent>
-        <InputComponent
+        />
+        <label htmlFor="password">Password</label>
+
+        <input
           ref={register}
           type="password"
           placeholder="Password"
           {...register("password", { required: "Password is required" })}
-        ></InputComponent>
+        ></input>
 
         <ButtonComponent type="submit">Log In</ButtonComponent>
         <Link to="/signUp">Sign Up</Link>

@@ -1,0 +1,22 @@
+@use "../abstract/colors" as *;
+@use "../abstract/mixin" as *;
+
+.message_container {
+  border: 5px solid $main_color;
+  color: $main_color;
+
+  @include flex_center;
+
+  &--sent {
+    align-self: flex-end;
+    border-radius: 15px;
+    padding: 10px;
+    background-color: $background_color;
+  }
+  &--received {
+    border-radius: 15px;
+    padding: 10px;
+    align-self: flex-start;
+    background-color: $blue;
+  }
+}

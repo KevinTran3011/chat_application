@@ -7,9 +7,14 @@ const chatSlice = createSlice({
     addMessage: (state, action) => {
       state.messages.push(action.payload);
     },
+    removeMessage: (state, action) => {
+      state.messages = state.messages.filter(
+        (message) => message.id !== action.payload
+      );
+    },
   },
 });
 
-export const { addMessage } = chatSlice.actions;
+export const { addMessage, removeMessage } = chatSlice.actions;
 
 export default chatSlice.reducer;

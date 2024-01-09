@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { ModifiedButton } from "./button.styles";
 
 const ButtonComponent = ({ children, ...otherProps }) => {

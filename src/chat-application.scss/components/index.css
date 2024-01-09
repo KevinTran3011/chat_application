@@ -1,1 +1,42 @@
-/*# sourceMappingURL=index.css.map */
+.message_container {
+  border: 5px solid #fff;
+  color: #fff;
+  display: flex;
+  align-items: center;
+}
+.message_container--sent {
+  align-self: flex-end;
+  border-radius: 15px;
+  padding: 10px;
+  background-color: #252525;
+}
+.message_container--received {
+  border-radius: 15px;
+  padding: 10px;
+  align-self: flex-start;
+  background-color: #47ace4;
+}
+
+.chatContacts_container {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.chatContacts_name {
+  cursor: pointer;
+}
+
+.chatRoom_container {
+  background-color: #252525;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 15px;
+}/*# sourceMappingURL=index.css.map */

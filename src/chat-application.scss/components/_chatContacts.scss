@@ -1,0 +1,12 @@
+@use "../abstract/mixin" as *;
+
+.chatContacts_container {
+  @include flex_center;
+  flex-direction: row;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.chatContacts_name {
+  cursor: pointer;
+}

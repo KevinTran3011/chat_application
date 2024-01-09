@@ -30,30 +30,54 @@ body {
   font-size: 50px;
 }
 
-.store_container {
+.chatContacts_container {
   display: flex;
   align-items: center;
-  justify-content: center;
-  height: 100vh;
+  flex-direction: row;
+  gap: 15px;
+  margin-bottom: 10px;
 }
 
-.categoryPreview_container {
-  display: flex;
-  align-items: center;
-  align-items: center;
-  align-self: center;
-  justify-self: center;
-  border-radius: 4px;
-  gap: 20px;
-  padding: 20px;
-  border: 1px solid #fff;
+.chatContacts_name {
+  cursor: pointer;
+}
+
+.chatRoom_container {
+  background-color: #252525;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 15px;
 }
 
 body {
   background-color: #252525;
 }
 
-.content {
+.app_container {
   margin: 30px;
   padding: 15px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+.sideBar_container {
+  padding: 15px;
+  padding-left: 0px;
+}
+
+.sideBar_title {
+  margin-bottom: 15px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.sideBar_body ul {
+  padding-left: 0rem;
 }/*# sourceMappingURL=main.css.map */

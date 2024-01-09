@@ -4,6 +4,7 @@
   padding: 15px;
   padding-left: 0px;
   border: 3px solid $box_outline;
+  border-right: 0px;
   height: 100%;
   padding: 5px;
 }
@@ -13,9 +14,15 @@
   font-size: 1.5rem;
   font-weight: 600;
   color: $main_color;
+  padding: 5px;
+  border-bottom: 3px solid $box_outline;
 }
 
+.sideBar_body_title {
+  margin-bottom: 10px;
+}
 .sideBar_body {
+  padding: 5px;
   ul {
     padding-left: 0rem;
   }

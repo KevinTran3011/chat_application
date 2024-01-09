@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import ChatWindow from "../chatWindow/chatWindow.component";
 import "../../chat-application.scss/main.css";
 import SideBar from "../sideBar/sideBar.component";
+import RightSideBar from "../rightSideBar/rightSideBar.component";
 import { useSelector } from "react-redux";
 
 const ChatRoom = () => {
@@ -36,6 +37,9 @@ const ChatRoom = () => {
             targetUserId={targetUserId}
             targetUserName={targetUserName}
           />
+        </div>
+        <div className="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+          <RightSideBar />
         </div>
       </div>
     </div>

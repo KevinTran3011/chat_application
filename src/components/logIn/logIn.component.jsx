@@ -10,11 +10,13 @@ import {
   signoutFailure,
   signoutSuccess,
 } from "../../redux/slice/authSlice";
+import PersonIcon from "@mui/icons-material/Person";
 import { auth, db } from "../../firebase";
 import { useNavigate } from "react-router-dom";
-
+import "../../chat-application.scss/main.css";
 import { DevTool } from "@hookform/devtools";
 import { Link } from "react-router-dom";
+import { Input } from "@mui/icons-material";
 
 const LogIn = () => {
   const {
@@ -56,25 +58,36 @@ const LogIn = () => {
     }
   };
   return (
-    <div className="Login_container">
-      <form className="Login_form" onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="email">Email</label>
-        <input
+    <div className="logIn_container">
+      <form className="logIn_form" onSubmit={handleSubmit(onSubmit)}>
+        <div className="logIn_avatar">
+          <PersonIcon />
+        </div>
+        <label htmlFor="email" className="title--form">
+          Email
+        </label>
+        <InputComponent
           type="email"
+          className="inputField"
           placeholder="Email"
           {...register("email", { required: "Email is required" })}
         />
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password" className="title--form">
+          Password
+        </label>
 
-        <input
+        <InputComponent
           ref={register}
           type="password"
+          className="inputField"
           placeholder="Password"
           {...register("password", { required: "Password is required" })}
-        ></input>
+        ></InputComponent>
 
         <ButtonComponent type="submit">Log In</ButtonComponent>
-        <Link to="/signUp">Sign Up</Link>
+        <Link to="/signUp">
+          <div className="links_text">Don't have an account ? Sign up</div>
+        </Link>
       </form>
 
       <DevTool control={control} />

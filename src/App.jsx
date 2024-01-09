@@ -7,6 +7,7 @@ import SignUp from "./components/signUp/signUp.component";
 import ChatWindow from "./components/chatWindow/chatWindow.component";
 import Settings from "./components/settings/settings.component";
 import ChatRoom from "./components/chatRoom/chatRoom.component";
+import "@fontsource/plus-jakarta-sans";
 import "./App.css";
 
 function App() {

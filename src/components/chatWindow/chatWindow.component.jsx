@@ -97,7 +97,9 @@ const ChatWindow = ({ currentUserId, targetUserId, targetUserName }) => {
       ))}
       <div className="chatWindow_input">
         <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-          <ControlPointIcon></ControlPointIcon>
+          <div className="addIcon">
+            <ControlPointIcon></ControlPointIcon>
+          </div>
         </div>
         <div className="col-lg-10 col-md-10 col-sm-10 col-xs-10">
           <InputComponent
@@ -110,7 +112,9 @@ const ChatWindow = ({ currentUserId, targetUserId, targetUserName }) => {
           />
         </div>
         <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1">
-          <SendIcon onClick={handleSendMessage} />
+          <div className="sendIcon">
+            <SendIcon onClick={handleSendMessage} />
+          </div>
         </div>
       </div>
     </div>

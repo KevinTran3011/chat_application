@@ -61,7 +61,7 @@ const LogIn = () => {
     <div className="logIn_container">
       <form className="logIn_form" onSubmit={handleSubmit(onSubmit)}>
         <div className="logIn_avatar">
-          <PersonIcon />
+          <PersonIcon className="logIn_avatar--icon" />
         </div>
         <label htmlFor="email" className="title--form">
           Email
@@ -84,7 +84,9 @@ const LogIn = () => {
           {...register("password", { required: "Password is required" })}
         ></InputComponent>
 
-        <ButtonComponent type="submit">Log In</ButtonComponent>
+        <ButtonComponent className="logIn_button" type="submit">
+          <div className="title--form">Log In</div>
+        </ButtonComponent>
         <Link to="/signUp">
           <div className="links_text">Don't have an account ? Sign up</div>
         </Link>

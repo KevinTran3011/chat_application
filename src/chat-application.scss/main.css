@@ -38,7 +38,7 @@ body {
   align-items: center;
   flex-direction: row;
   gap: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
 }
 
 .chatContacts_name {
@@ -65,7 +65,7 @@ body {
 .chatWindow_container {
   border: 3px solid #5ce1e6;
   padding: 5px;
-  height: 100%;
+  height: 100vh;
 }
 
 .chatWindow_input {
@@ -75,6 +75,21 @@ body {
 }
 .chatWindow_input .inputField {
   width: 100%;
+}
+
+.addIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.sendIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  rotate: -45deg;
 }
 
 body {
@@ -141,6 +156,7 @@ body {
   padding: 15px;
   border: 3px solid #5ce1e6;
   border-radius: 15px;
+  gap: 20px;
   width: 100%;
   height: 100%;
   padding: 15%;
@@ -151,13 +167,28 @@ body {
 .logIn_form .logIn_avatar {
   display: flex;
   align-items: center;
-  padding: 15px;
+  padding: 22px;
   border: 3px solid #5ce1e6;
   width: 200px;
   height: 200px;
   border-radius: 25px;
 }
+.logIn_form .logIn_avatar--icon {
+  width: 150px;
+  height: 150px;
+  align-self: center;
+  display: flex;
+  align-items: center;
+}
 .logIn_form .inputField {
   width: 100%;
   padding: 10px;
+  border: 5px solid #5ce1e6;
+  margin-bottom: 10px;
+}
+.logIn_form .logIn_button {
+  width: 50%;
+  height: 10%;
+  border: 5px solid #fff;
+  margin-top: 30px;
 }/*# sourceMappingURL=main.css.map */

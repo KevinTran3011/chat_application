@@ -22,7 +22,7 @@
   align-items: center;
   flex-direction: row;
   gap: 15px;
-  margin-bottom: 15px;
+  margin-bottom: 25px;
 }
 
 .chatContacts_name {
@@ -49,7 +49,7 @@
 .chatWindow_container {
   border: 3px solid #5ce1e6;
   padding: 5px;
-  height: 100%;
+  height: 100vh;
 }
 
 .chatWindow_input {
@@ -59,4 +59,19 @@
 }
 .chatWindow_input .inputField {
   width: 100%;
+}
+
+.addIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.sendIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  rotate: -45deg;
 }/*# sourceMappingURL=index.css.map */

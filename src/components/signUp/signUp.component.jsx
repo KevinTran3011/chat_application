@@ -54,21 +54,32 @@ const SignUp = () => {
     <div className="signUp_container">
       <div className="signUp_title">Sign Up</div>
       <form className="signUp_form" onSubmit={handleSubmit(onSubmit)}>
+        <label htmlFor="username">Username</label>
         <InputComponent
           type="text"
           {...register("username", { required: "Please enter username" })}
           placeholder="Username"
         />
+        <label htmlFor="email">Email</label>
+
         <InputComponent
           type="email"
           {...register("email", { required: "Please enter email" })}
           placeholder="Email"
         />
+        <label htmlFor="password">Password</label>
 
         <InputComponent
           type="password"
           {...register("password", { required: "Please enter password" })}
           placeholder="Password"
+        />
+        <label htmlFor="username">Confirm Password</label>
+
+        <InputComponent
+          type="password"
+          {...register("password", { required: "Please enter password" })}
+          placeholder="confirm password"
         />
         <ButtonComponent type="submit" className="signUp_button">
           Sign Up

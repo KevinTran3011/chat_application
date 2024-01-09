@@ -8,12 +8,12 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 const ChatContacts = ({ id, userName, onSelectUser }) => {
   return (
     <div className="chatContacts_container">
-      <div className="col-lg-3 col-md-3 col-sm-3 col-xs-3">
+      <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1">
         <div className="chatContacts_avatar">
           <AccountCircleIcon sx={{ width: 30, height: 30 }} />
         </div>
       </div>
-      <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+      <div className="col-lg-8 col-md-8 col-sm-8 col-xs-8">
         <div
           className="chatContacts_name"
           onClick={() => onSelectUser(id, userName)}

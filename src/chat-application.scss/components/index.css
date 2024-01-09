@@ -27,6 +27,11 @@
 
 .chatContacts_name {
   cursor: pointer;
+  border: 3px solid #5ce1e6;
+  background-color: #fff;
+  color: #252525;
+  border-radius: 15px;
+  padding: 3px;
 }
 
 .chatRoom_container {
@@ -39,4 +44,19 @@
   height: 100%;
   overflow: auto;
   padding: 15px;
+}
+
+.chatWindow_container {
+  border: 3px solid #5ce1e6;
+  padding: 5px;
+  height: 100%;
+}
+
+.chatWindow_input {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+.chatWindow_input .inputField {
+  width: 100%;
 }/*# sourceMappingURL=index.css.map */

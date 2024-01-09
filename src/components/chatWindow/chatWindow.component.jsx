@@ -11,6 +11,7 @@ import {
 } from "firebase/firestore";
 import { auth, db } from "../../firebase";
 import SendIcon from "@mui/icons-material/Send";
+import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import InputComponent from "../Input/input.component";
 
 const ChatWindow = ({ currentUserId, targetUserId, targetUserName }) => {
@@ -87,21 +88,31 @@ const ChatWindow = ({ currentUserId, targetUserId, targetUserName }) => {
   };
 
   return (
-    <div>
-      <h2>Chat with {targetUserName}</h2>
+    <div className="chatWindow_container">
+      <h2> {targetUserName}</h2>
       {messages.map((message) => (
         <div key={message.id}>
           <p>{message.text}</p>
         </div>
       ))}
-      <InputComponent
-        type="text"
-        name="newMessage"
-        value={newMessage}
-        onChange={(e) => setNewMessage(e.target.value)}
-        placeholder="Type your message here..."
-      />
-      <SendIcon onClick={handleSendMessage} />
+      <div className="chatWindow_input">
+        <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+          <ControlPointIcon></ControlPointIcon>
+        </div>
+        <div className="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+          <InputComponent
+            type="text"
+            name="newMessage"
+            className="inputField"
+            value={newMessage}
+            onChange={(e) => setNewMessage(e.target.value)}
+            placeholder="Type your message here..."
+          />
+        </div>
+        <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+          <SendIcon onClick={handleSendMessage} />
+        </div>
+      </div>
     </div>
   );
 };

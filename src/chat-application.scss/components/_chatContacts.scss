@@ -1,4 +1,5 @@
 @use "../abstract/mixin" as *;
+@use "../abstract/colors" as *;
 
 .chatContacts_container {
   @include flex_center;
@@ -9,4 +10,9 @@
 
 .chatContacts_name {
   cursor: pointer;
+  border: 3px solid $box_outline;
+  background-color: $main_color;
+  color: $background_color;
+  border-radius: 15px;
+  padding: 3px;
 }

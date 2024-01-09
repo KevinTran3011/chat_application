@@ -1,0 +1,17 @@
+@use "../abstract/colors" as *;
+@use "../abstract/mixin" as *;
+
+.chatWindow_container {
+  border: 3px solid $box_outline;
+  padding: 5px;
+  height: 100%;
+}
+
+.chatWindow_input {
+  @include flex_center;
+  flex-direction: row;
+
+  .inputField {
+    width: 100%;
+  }
+}

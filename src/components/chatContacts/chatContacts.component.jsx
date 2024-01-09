@@ -10,7 +10,7 @@ const ChatContacts = ({ id, userName, onSelectUser }) => {
     <div className="chatContacts_container">
       <div className="col-lg-3 col-md-3 col-sm-3 col-xs-3">
         <div className="chatContacts_avatar">
-          <AccountCircleIcon />
+          <AccountCircleIcon sx={{ width: 30, height: 30 }} />
         </div>
       </div>
       <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -18,7 +18,7 @@ const ChatContacts = ({ id, userName, onSelectUser }) => {
           className="chatContacts_name"
           onClick={() => onSelectUser(id, userName)}
         >
-          <div className="header">{userName}</div>
+          <div className="link_text">{userName}</div>
         </div>
       </div>
       <div className="col-lg-3 col-md-3 col-sm-3 col-xs-3">

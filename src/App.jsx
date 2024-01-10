@@ -24,7 +24,7 @@ function App() {
               <Route path="/:userId/chats/" element={<ChatRoom />}></Route>
             )}
             <Route
-              path="/chat/:chatId/settings"
+              path="/:userId/settings"
               element={<Settings></Settings>}
             ></Route>
           </Routes>

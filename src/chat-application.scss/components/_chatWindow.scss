@@ -21,6 +21,8 @@
   overflow-y: auto;
   flex-grow: 1;
   margin-bottom: 15px;
+  @include flex_center;
+  flex-direction: column;
 }
 
 .chatWindow_input {

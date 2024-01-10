@@ -2,30 +2,24 @@
 @use "../abstract/mixin" as *;
 
 .message_container {
-  border: 5px solid $main_color;
+  border: 3px solid $main_color;
   color: $main_color;
   @include flex_center;
-  max-width: 300px;
+  max-width: 250px;
   margin-bottom: 10px;
 
   &--sender {
     @extend .message_container;
     align-self: flex-end;
-    align-items: flex-end;
-    justify-content: flex-end;
-    justify-self: flex-end;
     border-radius: 15px;
     padding: 10px;
     background-color: $box_outline;
   }
   &--receiver {
     @extend .message_container;
+    align-self: flex-start;
     border-radius: 15px;
     padding: 10px;
-    align-self: flex-start;
-    align-items: flex-start;
-    justify-content: flex-start;
-    justify-self: flex-start;
     background-color: $yellow;
   }
 }

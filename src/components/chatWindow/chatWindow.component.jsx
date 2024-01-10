@@ -13,8 +13,14 @@ import { auth, db } from "../../firebase";
 import SendIcon from "@mui/icons-material/Send";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import InputComponent from "../Input/input.component";
+import Message from "../message/message.component";
 
-const ChatWindow = ({ currentUserId, targetUserId, targetUserName }) => {
+const ChatWindow = ({
+  currentUserId,
+  targetUserId,
+  targetUserName,
+  userName,
+}) => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
 
@@ -78,7 +84,7 @@ const ChatWindow = ({ currentUserId, targetUserId, targetUserName }) => {
           text: newMessage,
           timestamp: new Date(),
           userId: currentUserId,
-          targetUserId: targetUserId, // Add this line
+          targetUserId: targetUserId,
         }
       );
 
@@ -96,11 +102,22 @@ const ChatWindow = ({ currentUserId, targetUserId, targetUserName }) => {
           <div className="header">{targetUserName}</div>
         </div>
       </div>
-      {messages.map((message) => (
-        <div key={message.id}>
-          <p>{message.text}</p>
+
+      {!targetUserId ? (
+        <div className="chatWindow--empty">
+          Welcome {userName}, choose a contact to have a conversation
         </div>
-      ))}
+      ) : (
+        messages.map((message) => (
+          <Message
+            key={message.id}
+            message={message}
+            currentUserId={currentUserId}
+            targetUserId={targetUserId}
+          />
+        ))
+      )}
+
       <div className="chatWindow_input">
         <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1">
           <div className="addIcon">

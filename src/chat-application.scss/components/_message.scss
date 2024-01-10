@@ -4,19 +4,21 @@
 .message_container {
   border: 5px solid $main_color;
   color: $main_color;
-
+  margin-bottom: 15px;
   @include flex_center;
 
-  &--sent {
+  &--sender {
+    @extend .message_container;
     align-self: flex-end;
     border-radius: 15px;
     padding: 10px;
-    background-color: $background_color;
+    background-color: $box_outline;
   }
-  &--received {
+  &--receiver {
+    @extend .message_container;
     border-radius: 15px;
     padding: 10px;
     align-self: flex-start;
-    background-color: $blue;
+    background-color: $yellow;
   }
 }

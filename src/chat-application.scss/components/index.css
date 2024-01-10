@@ -1,20 +1,21 @@
-.message_container {
+.message_container, .message_container--receiver, .message_container--sender {
   border: 5px solid #fff;
   color: #fff;
+  margin-bottom: 15px;
   display: flex;
   align-items: center;
 }
-.message_container--sent {
+.message_container--sender {
   align-self: flex-end;
   border-radius: 15px;
   padding: 10px;
-  background-color: #252525;
+  background-color: #5ce1e6;
 }
-.message_container--received {
+.message_container--receiver {
   border-radius: 15px;
   padding: 10px;
   align-self: flex-start;
-  background-color: #47ace4;
+  background-color: #f5d547;
 }
 
 .chatContacts_container {

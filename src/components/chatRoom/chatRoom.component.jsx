@@ -36,6 +36,7 @@ const ChatRoom = () => {
             currentUserId={userData?.uid} // Changed from userData?.id to userData?.uid
             targetUserId={targetUserId}
             targetUserName={targetUserName}
+            userName={userData?.userName}
           />
         </div>
         <div className="col-lg-3 col-md-3 col-sm-3 col-xs-3">

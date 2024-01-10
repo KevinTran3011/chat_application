@@ -4,17 +4,19 @@ import SearchIcon from "@mui/icons-material/Search";
 
 const RightSideBar = () => {
   return (
-    <div className="sideBar_container">
+    <div className="rightSideBar_container">
       <div className="sideBar_title">Right Side bar</div>
       <div className="rightSideBar_body">
         <div className="rightSideBar_avatar">
-          <AccountCircleIcon />
+          <AccountCircleIcon className="rightSideBar_avatar--icon" />
         </div>
-        <div className="rightSideBar_settings">
-          <SettingsIcon />
-        </div>
-        <div className="rightSideBar_search">
-          <SearchIcon />
+        <div className="rightSideBar_contents">
+          <div className="rightSideBar_settings">
+            <SettingsIcon />
+          </div>
+          <div className="rightSideBar_search">
+            <SearchIcon />
+          </div>
         </div>
       </div>
     </div>

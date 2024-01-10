@@ -54,3 +54,20 @@
 .sendIcon {
   rotate: -45deg;
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: $box_outline;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $main_color;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: $blue;
+}

@@ -24,9 +24,16 @@ const SideBar = ({ onSelectUser }) => {
   return (
     <div className="sideBar_container">
       <div className="sideBar_title">
-        <div className="header">Side bar</div>
+        <div className="sideBar_header">
+          <div className="header">Side Bar</div>
+          <div className="signOut_button">Sign Out</div>
+        </div>
         <div className="searchSection">
-          <InputComponent type="text" placeholder="Search" />
+          <InputComponent
+            className="search_input"
+            type="text"
+            placeholder="Search"
+          />
         </div>
       </div>
       <div className="sideBar_body">

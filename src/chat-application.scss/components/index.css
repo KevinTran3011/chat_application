@@ -99,4 +99,21 @@
 
 .sendIcon {
   rotate: -45deg;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 15px;
+}
+
+::-webkit-scrollbar-track {
+  background: #5ce1e6;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #fff;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #47ace4;
 }/*# sourceMappingURL=index.css.map */

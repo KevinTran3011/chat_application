@@ -1,5 +1,7 @@
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import SettingsIcon from "@mui/icons-material/Settings";
+import SearchIcon from "@mui/icons-material/Search";
+
 const RightSideBar = () => {
   return (
     <div className="sideBar_container">
@@ -10,6 +12,9 @@ const RightSideBar = () => {
         </div>
         <div className="rightSideBar_settings">
           <SettingsIcon />
+        </div>
+        <div className="rightSideBar_search">
+          <SearchIcon />
         </div>
       </div>
     </div>

@@ -6,9 +6,24 @@
   padding-left: 0px;
   border: 3px solid $box_outline;
   border-right: 0px;
-  height: 100%;
+  height: 100vh;
   padding: 5px;
-  overflow: auto;
+  overflow: hidden;
+
+  .search_input {
+    width: 100%;
+  }
+}
+
+.sideBar_header {
+  @include flex_center;
+  flex-direction: row;
+  gap: 50px;
+  margin-bottom: 10px;
+  .signOut_button {
+    align-self: flex-end;
+    justify-self: flex-end;
+  }
 }
 
 .sideBar_title {
@@ -18,6 +33,7 @@
   color: $main_color;
   padding: 5px;
   border-bottom: 3px solid $box_outline;
+
   position: sticky;
   min-height: 11%;
   max-height: 11%;
@@ -27,8 +43,15 @@
   @include flex_center;
   border-top: 3px solid $box_outline;
   position: sticky;
-  max-height: 300px;
+  height: 10%;
+  background-color: $background_color;
   bottom: 0;
+  &--settings {
+    font-size: 24px;
+  }
+  &--language {
+    font-size: 24px;
+  }
 }
 
 .sideBar_body_title {
@@ -36,6 +59,9 @@
 }
 .sideBar_body {
   padding: 5px;
+  height: 80%;
+  overflow-y: auto;
+
   ul {
     padding-left: 0rem;
   }

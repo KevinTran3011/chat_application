@@ -19,11 +19,11 @@ const ChatRoom = () => {
 
   return (
     <div className="chatRoom_container">
-      <div className="chatRoom-header">
+      {/* <div className="chatRoom-header">
         <div className="title">
           Welcome, pick a chat to start a conversation
         </div>
-      </div>
+      </div> */}
       <div
         className="chatRoom-body"
         style={{ display: "flex", flexDirection: "row" }}

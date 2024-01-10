@@ -7,13 +7,19 @@ import {
   signupSuccess,
 } from "../../redux/slice/signupSlice";
 import { collection, doc, setDoc } from "firebase/firestore";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from "firebase/storage";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../firebase";
 import { DevTool } from "@hookform/devtools";
 // import InputComponent from "../Input/input.component";
 import ButtonComponent from "../Button/button.component";
 import InputComponent from "../Input/input.component";
-import PersonIcon from "@mui/icons-material/Person";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
 
 const SignUp = () => {
   const { register, handleSubmit, reset, control } = useForm();
@@ -33,11 +39,35 @@ const SignUp = () => {
       const userId = userCredential.user.uid;
       const usersCollection = collection(db, "users");
       const userDoc = doc(usersCollection, userId);
-      await setDoc(userDoc, {
-        email: userCredential.user.email,
-        userName: data.username,
-        password: data.password,
-      });
+
+      // Upload avatar to Firebase Storage
+      const storage = getStorage();
+      const avatarRef = ref(storage, `avatars/${userId}`);
+      const uploadTask = uploadBytesResumable(avatarRef, data.avatar[0]);
+
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
+        },
+        (error) => {
+          console.error("Error uploading avatar:", error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            console.log("File available at", downloadURL);
+
+            setDoc(userDoc, {
+              email: userCredential.user.email,
+              userName: data.username,
+              password: data.password,
+              avatar: downloadURL,
+            });
+          });
+        }
+      );
 
       dispatch(signupSuccess());
       reset();
@@ -55,7 +85,17 @@ const SignUp = () => {
     <div className="signUp_container">
       <form className="signUp_form" onSubmit={handleSubmit(onSubmit)}>
         <div className="signUp_avatar">
-          <PersonIcon className="signUp_avatar--icon" />
+          <label htmlFor="avatar">
+            <PersonAddIcon />
+          </label>
+          <InputComponent
+            id="avatar"
+            type="file"
+            className="inputField"
+            style={{ display: "none" }}
+            {...register("avatar", { required: "Please upload an avatar" })}
+            placeholder="Avatar"
+          />
         </div>
 
         <label htmlFor="username" className="title--form">

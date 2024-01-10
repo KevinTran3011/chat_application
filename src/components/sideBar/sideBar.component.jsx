@@ -7,8 +7,9 @@ import ChatContacts from "../chatContacts/chatContacts.component";
 import InputComponent from "../Input/input.component";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
-import LanguageIcon from "@mui/icons-material/Language";
 import { useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.css";
+
 const SideBar = ({ onSelectUser }) => {
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();

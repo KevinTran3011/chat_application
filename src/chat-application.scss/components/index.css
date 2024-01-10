@@ -1,8 +1,8 @@
 .message_container, .message_container--receiver, .message_container--sender {
-  border: 3px solid #fff;
-  color: #fff;
   display: flex;
   align-items: center;
+  border: 3px solid #fff;
+  color: #fff;
   max-width: 250px;
   margin-bottom: 10px;
 }

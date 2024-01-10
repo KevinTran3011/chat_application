@@ -21,10 +21,6 @@
   flex-direction: row;
   gap: 50px;
   margin-bottom: 10px;
-  .signOut_button {
-    align-self: flex-end;
-    justify-self: flex-end;
-  }
 }
 
 .sideBar_title {
@@ -74,4 +70,9 @@
   ul {
     padding-left: 0rem;
   }
+}
+
+.signOut_button {
+  position: relative;
+  cursor: pointer;
 }

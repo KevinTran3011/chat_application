@@ -2,9 +2,9 @@
 @use "../abstract/mixin" as *;
 
 .message_container {
+  @include flex_center;
   border: 3px solid $main_color;
   color: $main_color;
-  @include flex_center;
   max-width: 250px;
   margin-bottom: 10px;
 

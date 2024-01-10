@@ -31,10 +31,6 @@ body {
   gap: 50px;
   margin-bottom: 10px;
 }
-.sideBar_header .signOut_button {
-  align-self: flex-end;
-  justify-self: flex-end;
-}
 
 .sideBar_title {
   margin-bottom: 15px;
@@ -79,6 +75,11 @@ body {
 }
 .sideBar_body ul {
   padding-left: 0rem;
+}
+
+.signOut_button {
+  position: relative;
+  cursor: pointer;
 }
 
 .logIn_container {

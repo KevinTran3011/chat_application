@@ -29,7 +29,7 @@ const ChatRoom = () => {
         style={{ display: "flex", flexDirection: "row" }}
       >
         <div className="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-          <SideBar onSelectUser={handleSelectUser} />
+          <SideBar onSelectUser={handleSelectUser} avatar={userData?.avatar} />
         </div>
         <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6">
           <ChatWindow
@@ -37,6 +37,7 @@ const ChatRoom = () => {
             targetUserId={targetUserId}
             targetUserName={targetUserName}
             userName={userData?.userName}
+            avatar={userData?.avatar}
           />
         </div>
         <div className="col-lg-3 col-md-3 col-sm-3 col-xs-3">

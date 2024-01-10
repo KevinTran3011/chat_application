@@ -60,6 +60,7 @@ const SideBar = ({ onSelectUser }) => {
                 id={user.id}
                 userName={user.userName}
                 onSelectUser={onSelectUser}
+                avatar={user.avatar}
               />
             ))}
         </ul>

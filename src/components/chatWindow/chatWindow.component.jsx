@@ -102,21 +102,22 @@ const ChatWindow = ({
           <div className="header">{targetUserName}</div>
         </div>
       </div>
-
-      {!targetUserId ? (
-        <div className="chatWindow--empty">
-          Welcome {userName}, choose a contact to have a conversation
-        </div>
-      ) : (
-        messages.map((message) => (
-          <Message
-            key={message.id}
-            message={message}
-            currentUserId={currentUserId}
-            targetUserId={targetUserId}
-          />
-        ))
-      )}
+      <div className="chatWindow--body">
+        {!targetUserId ? (
+          <div className="chatWindow--empty">
+            Welcome {userName}, choose a contact to have a conversation
+          </div>
+        ) : (
+          messages.map((message) => (
+            <Message
+              key={message.id}
+              message={message}
+              currentUserId={currentUserId}
+              targetUserId={targetUserId}
+            />
+          ))
+        )}
+      </div>
 
       <div className="chatWindow_input">
         <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1">

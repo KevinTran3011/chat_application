@@ -4,12 +4,16 @@
 .message_container {
   border: 5px solid $main_color;
   color: $main_color;
-  margin-bottom: 15px;
   @include flex_center;
+  max-width: 300px;
+  margin-bottom: 10px;
 
   &--sender {
     @extend .message_container;
     align-self: flex-end;
+    align-items: flex-end;
+    justify-content: flex-end;
+    justify-self: flex-end;
     border-radius: 15px;
     padding: 10px;
     background-color: $box_outline;
@@ -19,6 +23,9 @@
     border-radius: 15px;
     padding: 10px;
     align-self: flex-start;
+    align-items: flex-start;
+    justify-content: flex-start;
+    justify-self: flex-start;
     background-color: $yellow;
   }
 }

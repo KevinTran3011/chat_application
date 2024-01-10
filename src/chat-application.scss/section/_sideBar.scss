@@ -1,4 +1,5 @@
 @use "../abstract/colors" as *;
+@use "../abstract/mixin" as *;
 
 .sideBar_container {
   padding: 15px;
@@ -17,6 +18,17 @@
   color: $main_color;
   padding: 5px;
   border-bottom: 3px solid $box_outline;
+  position: sticky;
+  min-height: 11%;
+  max-height: 11%;
+}
+
+.sideBar_footer {
+  @include flex_center;
+  border-top: 3px solid $box_outline;
+  position: sticky;
+  max-height: 300px;
+  bottom: 0;
 }
 
 .sideBar_body_title {

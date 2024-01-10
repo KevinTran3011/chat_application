@@ -13,6 +13,7 @@ import { DevTool } from "@hookform/devtools";
 // import InputComponent from "../Input/input.component";
 import ButtonComponent from "../Button/button.component";
 import InputComponent from "../Input/input.component";
+import PersonIcon from "@mui/icons-material/Person";
 
 const SignUp = () => {
   const { register, handleSubmit, reset, control } = useForm();
@@ -52,25 +53,37 @@ const SignUp = () => {
 
   return (
     <div className="signUp_container">
-      <div className="signUp_title">Sign Up</div>
       <form className="signUp_form" onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor="username">Username</label>
+        <div className="signUp_avatar">
+          <PersonIcon className="signUp_avatar--icon" />
+        </div>
+
+        <label htmlFor="username" className="title--form">
+          Username
+        </label>
         <InputComponent
           type="text"
+          className="inputField"
           {...register("username", { required: "Please enter username" })}
           placeholder="Username"
         />
-        <label htmlFor="email">Email</label>
+        <label htmlFor="email" className="title--form">
+          Email
+        </label>
 
         <InputComponent
           type="email"
+          className="inputField"
           {...register("email", { required: "Please enter email" })}
           placeholder="Email"
         />
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password" className="title--form">
+          Password
+        </label>
 
         <InputComponent
           type="password"
+          className="inputField"
           {...register("password", { required: "Please enter password" })}
           placeholder="Password"
         />
@@ -78,7 +91,9 @@ const SignUp = () => {
         <ButtonComponent type="submit" className="signUp_button">
           Sign Up
         </ButtonComponent>
-        <Link to="/">Have an account? Sign In</Link>
+        <Link to="/">
+          <div className="links_text">Have an account? Sign In</div>
+        </Link>
       </form>
       <DevTool control={control} />
     </div>

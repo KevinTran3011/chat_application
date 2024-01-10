@@ -74,6 +74,8 @@ body {
   z-index: 10;
   border-bottom: 3px solid #5ce1e6;
   background-color: #252525;
+  max-height: 11%;
+  min-height: 11%;
 }
 
 .chatWindow--body {
@@ -97,7 +99,7 @@ body {
 }
 
 .chatWindow--title {
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   padding: 10px;
 }
 
@@ -163,6 +165,18 @@ body {
   color: #fff;
   padding: 5px;
   border-bottom: 3px solid #5ce1e6;
+  position: sticky;
+  min-height: 11%;
+  max-height: 11%;
+}
+
+.sideBar_footer {
+  display: flex;
+  align-items: center;
+  border-top: 3px solid #5ce1e6;
+  position: sticky;
+  max-height: 300px;
+  bottom: 0;
 }
 
 .sideBar_body_title {
@@ -179,7 +193,6 @@ body {
 .logIn_container {
   display: flex;
   align-items: center;
-  padding: 10px;
   background-color: #252525;
   color: #fff;
   position: absolute;
@@ -230,6 +243,58 @@ body {
   margin-bottom: 10px;
 }
 .logIn_form .logIn_button {
+  width: 50%;
+  height: 10%;
+  border: 5px solid #fff;
+  margin-top: 30px;
+}
+
+.signUp_container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 15px;
+}
+.signUp_container .signUp_form {
+  gap: 15px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border: 3px solid #5ce1e6;
+  border-radius: 15px;
+  width: 100%;
+  height: 100%;
+  padding: 25px 15% 5% 15%;
+}
+.signUp_container .signUp_form .signUp_avatar {
+  display: flex;
+  align-items: center;
+  padding: 22px;
+  border: 3px solid #5ce1e6;
+  width: 150px;
+  height: 150px;
+  border-radius: 25px;
+}
+.signUp_container .signUp_form .signUp_avatar--icon {
+  width: 100px;
+  height: 100px;
+  align-self: center;
+  display: flex;
+  align-items: center;
+}
+.signUp_container .signUp_form .inputField {
+  width: 100%;
+  padding: 10px;
+  border: 5px solid #5ce1e6;
+  margin-bottom: 10px;
+}
+.signUp_container .signUp_form .signUp_button {
   width: 50%;
   height: 10%;
   border: 5px solid #fff;

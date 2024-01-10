@@ -10,10 +10,11 @@ import {
   addDoc,
 } from "firebase/firestore";
 import { auth, db } from "../../firebase";
-import SendIcon from "@mui/icons-material/Send";
-import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import InputComponent from "../Input/input.component";
 import Message from "../message/message.component";
+import WavingHandIcon from "@mui/icons-material/WavingHand";
+import SendIcon from "@mui/icons-material/Send";
+import ControlPointIcon from "@mui/icons-material/ControlPoint";
 
 const ChatWindow = ({
   currentUserId,
@@ -105,7 +106,7 @@ const ChatWindow = ({
       <div className="chatWindow--body">
         {!targetUserId ? (
           <div className="chatWindow--empty">
-            Welcome {userName}, choose a contact to have a conversation
+            Choose a contact to have a conversation
           </div>
         ) : (
           messages.map((message) => (

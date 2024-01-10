@@ -60,6 +60,8 @@
   z-index: 10;
   border-bottom: 3px solid #5ce1e6;
   background-color: #252525;
+  max-height: 11%;
+  min-height: 11%;
 }
 
 .chatWindow--body {
@@ -83,7 +85,7 @@
 }
 
 .chatWindow--title {
-  margin-bottom: 20px;
+  margin-bottom: 18px;
   padding: 10px;
 }
 

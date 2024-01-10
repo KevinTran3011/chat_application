@@ -4,6 +4,8 @@ import { getDocs, collection } from "firebase/firestore";
 import { db } from "../../firebase";
 import ChatContacts from "../chatContacts/chatContacts.component";
 import InputComponent from "../Input/input.component";
+import SettingsIcon from "@mui/icons-material/Settings";
+import LanguageIcon from "@mui/icons-material/Language";
 
 const SideBar = ({ onSelectUser }) => {
   const [users, setUsers] = useState([]);
@@ -42,6 +44,14 @@ const SideBar = ({ onSelectUser }) => {
               />
             ))}
         </ul>
+      </div>
+      <div className="sideBar_footer">
+        <div className="sideBar_footer--settings">
+          <SettingsIcon />
+        </div>
+        <div className="sideBar_footer--language">
+          <LanguageIcon />
+        </div>
       </div>
     </div>
   );

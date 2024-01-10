@@ -3,9 +3,7 @@
 
 .logIn_container {
   @include flex_center;
-  padding: 10px;
   background-color: $background_color;
-
   color: $main_color;
   position: absolute;
   top: 0;

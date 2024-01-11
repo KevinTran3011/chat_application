@@ -29,6 +29,11 @@ body {
 .links_text {
   font-size: 16px;
   color: $blue;
+
+  &--room {
+    @extend .links_text;
+    color: $main_color;
+  }
 }
 
 .header {

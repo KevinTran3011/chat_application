@@ -21,6 +21,7 @@
   flex-direction: row;
   gap: 50px;
   margin-bottom: 10px;
+  justify-content: space-between;
 }
 
 .sideBar_title {
@@ -39,6 +40,7 @@
 .sideBar_footer {
   @include flex_center;
   border-top: 3px solid $box_outline;
+  justify-content: space-between;
   position: sticky;
   height: 10%;
   background-color: $background_color;
@@ -72,6 +74,9 @@
   }
 }
 
+.searchSection {
+  margin-bottom: 15px;
+}
 .signOut_button {
   position: relative;
   cursor: pointer;

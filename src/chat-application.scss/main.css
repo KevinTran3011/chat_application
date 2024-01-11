@@ -15,9 +15,12 @@ body {
   align-self: flex-start;
 }
 
-.links_text {
+.links_text, .links_text--room {
   font-size: 16px;
   color: #47ace4;
+}
+.links_text--room {
+  color: #fff;
 }
 
 .header {
@@ -48,6 +51,11 @@ body {
   color: #252525;
   border-radius: 15px;
   padding: 3px;
+}
+
+.chatContacts_avatar--picture {
+  width: 30px;
+  height: 30px;
 }
 
 .chatRoom_container {
@@ -185,6 +193,7 @@ body {
   flex-direction: row;
   gap: 50px;
   margin-bottom: 10px;
+  justify-content: space-between;
 }
 
 .sideBar_title {
@@ -203,6 +212,7 @@ body {
   display: flex;
   align-items: center;
   border-top: 3px solid #5ce1e6;
+  justify-content: space-between;
   position: sticky;
   height: 10%;
   background-color: #252525;
@@ -230,6 +240,10 @@ body {
 }
 .sideBar_body ul {
   padding-left: 0rem;
+}
+
+.searchSection {
+  margin-bottom: 15px;
 }
 
 .signOut_button {
@@ -381,4 +395,45 @@ body {
   display: flex;
   align-items: center;
   flex-direction: row;
+}
+
+.settings_container {
+  display: flex;
+  align-items: center;
+  background-color: #252525;
+  color: #fff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 15px;
+  flex-direction: column;
+}
+.settings_container .links_container {
+  margin-bottom: 15px;
+}
+.settings_container .settings_information {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  flex-direction: row;
+  margin-bottom: 25px;
+}
+.settings_container .settings_form {
+  border: 3px solid #5ce1e6;
+  width: 100%;
+  height: 100%;
+  padding: 1% 5% 1% 5%;
+}
+.settings_container .settings_form .settings_body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-right: 25%;
+}
+.settings_container .settings_form .settings_body .settings_body--header {
+  text-decoration: underline;
+  margin-bottom: 15px;
 }/*# sourceMappingURL=main.css.map */

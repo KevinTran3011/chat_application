@@ -36,6 +36,11 @@
   padding: 3px;
 }
 
+.chatContacts_avatar--picture {
+  width: 30px;
+  height: 30px;
+}
+
 .chatRoom_container {
   background-color: #252525;
   position: fixed;

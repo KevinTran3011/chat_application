@@ -43,21 +43,22 @@ const SideBar = ({ onSelectUser }) => {
           <div className="signedInUser_avatar">
             <img
               src={userData.avatar}
-              style={{ width: "30px", height: "30px", borderRadius: "50%" }}
+              style={{ width: "50px", height: "50px", borderRadius: "50%" }}
             />
           </div>
-        </div>
-        <div className="searchSection">
-          <InputComponent
-            className="search_input"
-            type="text"
-            placeholder="Search"
-          />
         </div>
       </div>
       <div className="sideBar_body">
         <div className="sideBar_body_title">
           <div className="header">Chats</div>
+        </div>
+
+        <div className="searchSection" style={{ marginBottom: "15px" }}>
+          <InputComponent
+            className="search_input"
+            type="text"
+            placeholder="Search for contacts"
+          />
         </div>
         <ul>
           {users &&
@@ -74,7 +75,7 @@ const SideBar = ({ onSelectUser }) => {
       </div>
       <div className="sideBar_footer">
         <Link to="/:userId/settings">
-          <div className="sideBar_footer--settings">
+          <div className="links_text--room">
             <SettingsIcon className="sideBar_settings--icon" />
             <div className="settings_text">Settings</div>
           </div>

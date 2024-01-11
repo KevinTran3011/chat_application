@@ -1,29 +1,42 @@
 // chatRoom.component.jsx
 
-import React, { useEffect, useState } from "react";
 import ChatWindow from "../chatWindow/chatWindow.component";
 import "../../chat-application.scss/main.css";
 import SideBar from "../sideBar/sideBar.component";
 import RightSideBar from "../rightSideBar/rightSideBar.component";
+import {
+  targetUserFailure,
+  targetUserRequest,
+  targetUserSuccess,
+} from "../../redux/slice/targetUserSlice";
+import PersonIcon from "@mui/icons-material/Person";
+import { db } from "../../firebase";
+import { useDispatch } from "react-redux";
+import { getDoc, doc } from "firebase/firestore";
 import { useSelector } from "react-redux";
 
 const ChatRoom = () => {
+  const dispatch = useDispatch();
   const userData = useSelector((state) => state.user.user);
-  const [targetUserId, setTargetUserId] = useState(null);
-  const [targetUserName, setTargetUserName] = useState(null);
+  const targetUser = useSelector((state) => state.targetUser);
+  const { targetUserId, targetUserName, targetUserAvatar } = targetUser;
+  const userAvatar = targetUserAvatar ? targetUserAvatar : <PersonIcon />;
 
-  const handleSelectUser = (userId, userName) => {
-    setTargetUserId(userId);
-    setTargetUserName(userName);
+  const handleSelectUser = async (userId, userName) => {
+    dispatch(targetUserRequest({ userId, userName, userAvatar }));
+
+    try {
+      const targetedUserDoc = await getDoc(doc(db, "users", userId));
+      const targetedUserData = targetedUserDoc.data();
+
+      dispatch(targetUserSuccess(targetedUserData));
+    } catch (error) {
+      dispatch(targetUserFailure(error));
+    }
   };
 
   return (
     <div className="chatRoom_container">
-      {/* <div className="chatRoom-header">
-        <div className="title">
-          Welcome, pick a chat to start a conversation
-        </div>
-      </div> */}
       <div
         className="chatRoom-body"
         style={{ display: "flex", flexDirection: "row" }}

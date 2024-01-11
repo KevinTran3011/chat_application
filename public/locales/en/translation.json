@@ -1,0 +1,21 @@
+{
+  "chatWindow": {
+    "welcome": "Welcome",
+    "prompt": "Select a contact to start a conversation with"
+  },
+  "sideBar": {
+    "header": "Chats",
+    "search": "Search for contacts",
+    "settings": "settings",
+    "logOut": "Log out"
+  },
+  "rightSidebar": {},
+  "logIn": {
+    "emailLabel": "Email",
+    "emailPlaceholder": "Enter your email",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter your password"
+  },
+  "signUp": {},
+  "settings": {}
+}

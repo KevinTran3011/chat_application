@@ -50,7 +50,7 @@ const Settings = () => {
               <div className="header">Change language</div>
             </div>
             <LanguageIcon sx={{ width: 50, height: 50 }} />
-            <div className="settings_body--language--title">Language</div>
+            <div className="header">Current language : </div>
           </div>
           <div className="settings_body--theme">
             <div className="settings_body--header">

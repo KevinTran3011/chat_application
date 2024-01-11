@@ -7,6 +7,8 @@ import ChatContacts from "../chatContacts/chatContacts.component";
 import InputComponent from "../Input/input.component";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+
 import { useSelector } from "react-redux";
 import "bootstrap/dist/css/bootstrap.css";
 
@@ -41,10 +43,14 @@ const SideBar = ({ onSelectUser }) => {
         <div className="sideBar_header">
           <div className="signedInUser_name">{userData.userName}</div>
           <div className="signedInUser_avatar">
-            <img
-              src={userData.avatar}
-              style={{ width: "50px", height: "50px", borderRadius: "50%" }}
-            />
+            {userData.avatar ? (
+              <img
+                src={userData.avatar}
+                style={{ width: "50px", height: "50px", borderRadius: "50%" }}
+              />
+            ) : (
+              <AccountCircleIcon sx={{ width: 50, height: 50 }} />
+            )}
           </div>
         </div>
       </div>

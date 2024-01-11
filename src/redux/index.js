@@ -6,6 +6,7 @@ import signupReducer from "./slice/signupSlice";
 import chatReducer from "./slice/chatSlice";
 import authReducer from "./slice/authSlice";
 import userReducer from "./slice/userSlice";
+import targetUserReducer from "./slice/targetUserSlice";
 
 const persistConfig = {
   key: "root",
@@ -19,6 +20,7 @@ const persistedReducer = persistReducer(
     signUp: signupReducer,
     chat: chatReducer,
     user: userReducer,
+    targetUser: targetUserReducer,
   })
 );
 

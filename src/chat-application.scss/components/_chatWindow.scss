@@ -26,6 +26,22 @@
   @include flex_center;
   flex-direction: column;
 }
+.chatWindow--empty {
+  @include flex_center;
+  align-self: center;
+  flex-direction: column;
+  padding: 25% 10%;
+  gap: 15px;
+  height: 100%;
+  width: 100%;
+  color: $main_color;
+  font-size: 24px;
+  font-weight: 600;
+
+  .chatWindow--empty_text {
+    spacing: 1.5;
+  }
+}
 
 .chatWindow_input {
   @include flex_center;

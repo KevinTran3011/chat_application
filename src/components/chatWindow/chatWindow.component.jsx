@@ -12,16 +12,13 @@ import {
 import { auth, db } from "../../firebase";
 import InputComponent from "../Input/input.component";
 import Message from "../message/message.component";
-import WavingHandIcon from "@mui/icons-material/WavingHand";
+import ChatIcon from "@mui/icons-material/Chat";
 import SendIcon from "@mui/icons-material/Send";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
+import { useSelector } from "react-redux";
 
-const ChatWindow = ({
-  currentUserId,
-  targetUserId,
-  targetUserName,
-  userName,
-}) => {
+const ChatWindow = ({ currentUserId, targetUserId, targetUserName }) => {
+  const userData = useSelector((state) => state.user.user);
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
 
@@ -106,7 +103,13 @@ const ChatWindow = ({
       <div className="chatWindow--body">
         {!targetUserId ? (
           <div className="chatWindow--empty">
-            Choose a contact to have a conversation
+            <div className="chatWindow--empty_icon">
+              <ChatIcon style={{ fontSize: "100px" }} />
+            </div>
+            <div className="chatWindow--empty_text">
+              Welcome {userData.userName}, Choose a contact to have a
+              conversation
+            </div>
           </div>
         ) : (
           messages.map((message) => (

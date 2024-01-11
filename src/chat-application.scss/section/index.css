@@ -210,17 +210,14 @@ body {
 }
 
 .rightSideBar_body {
-  padding: 5px;
-  height: 80%;
-  overflow-y: auto;
-  align-items: center;
-}
-.rightSideBar_body .rightSideBar_avatar {
-  width: 150px;
-  height: 150px;
-  padding: 10% 25% 10% 25%;
+  padding: 5%;
+  height: 90%;
   display: flex;
   align-items: center;
+  flex-direction: column;
+  overflow-y: auto;
+  border-bottom: 3px solid #5ce1e6;
+  gap: 25px;
 }
 .rightSideBar_body .rightSideBar_avatar--icon {
   width: 150px;
@@ -228,12 +225,12 @@ body {
   align-self: center;
 }
 
-.rightSideBar_contents {
+.rightSideBar_contents, .rightSideBar_contents--search, .rightSideBar_contents--settings {
   display: flex;
   align-items: center;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 15px;
 }
-
 .settings_container {
   display: flex;
   align-items: center;

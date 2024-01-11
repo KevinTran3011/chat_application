@@ -20,10 +20,12 @@ import { DevTool } from "@hookform/devtools";
 import ButtonComponent from "../Button/button.component";
 import InputComponent from "../Input/input.component";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const { register, handleSubmit, reset, control } = useForm();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     console.log("onSubmit called with data:", data);
@@ -71,6 +73,7 @@ const SignUp = () => {
 
       dispatch(signupSuccess());
       reset();
+      navigate("/");
     } catch (err) {
       console.error("Error in onSubmit:", err.message);
       if (err.message.includes("email-already-in-use")) {

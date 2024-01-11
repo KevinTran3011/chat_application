@@ -5,6 +5,7 @@ import storage from "redux-persist/lib/storage";
 import signupReducer from "./slice/signupSlice";
 import chatReducer from "./slice/chatSlice";
 import authReducer from "./slice/authSlice";
+import userReducer from "./slice/userSlice";
 
 const persistConfig = {
   key: "root",
@@ -17,6 +18,7 @@ const persistedReducer = persistReducer(
     auth: authReducer,
     signUp: signupReducer,
     chat: chatReducer,
+    user: userReducer,
   })
 );
 

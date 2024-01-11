@@ -8,7 +8,7 @@ import RightSideBar from "../rightSideBar/rightSideBar.component";
 import { useSelector } from "react-redux";
 
 const ChatRoom = () => {
-  const userData = useSelector((state) => state.auth.user);
+  const userData = useSelector((state) => state.user.user);
   const [targetUserId, setTargetUserId] = useState(null);
   const [targetUserName, setTargetUserName] = useState(null);
 
@@ -29,7 +29,11 @@ const ChatRoom = () => {
         style={{ display: "flex", flexDirection: "row" }}
       >
         <div className="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-          <SideBar onSelectUser={handleSelectUser} avatar={userData?.avatar} />
+          <SideBar
+            onSelectUser={handleSelectUser}
+            avatar={userData?.avatar}
+            currentUserId={userData?.uid}
+          />
         </div>
         <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6">
           <ChatWindow

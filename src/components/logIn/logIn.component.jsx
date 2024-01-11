@@ -3,6 +3,7 @@ import InputComponent from "../Input/input.component";
 import ButtonComponent from "../Button/button.component";
 import { signInWithEmailAndPassword } from "@firebase/auth";
 import { useDispatch } from "react-redux";
+import { getDoc, doc } from "firebase/firestore";
 import {
   signinRequest,
   signinFailure,
@@ -10,6 +11,12 @@ import {
   signoutFailure,
   signoutSuccess,
 } from "../../redux/slice/authSlice";
+import {
+  userRequest,
+  userSuccess,
+  userFailure,
+  userLogout,
+} from "../../redux/slice/userSlice";
 import PersonIcon from "@mui/icons-material/Person";
 import { auth, db } from "../../firebase";
 import { useNavigate } from "react-router-dom";
@@ -34,6 +41,7 @@ const LogIn = () => {
 
     try {
       dispatch(signinRequest());
+      dispatch(userRequest());
       const userCredential = await signInWithEmailAndPassword(
         auth,
         data.email,
@@ -41,20 +49,24 @@ const LogIn = () => {
       );
       console.log(`Attempting to sign in user: ${userCredential}`);
 
-      // Extract only the necessary data
-      const userData = {
-        uid: userCredential.user.uid,
-        email: userCredential.user.email,
-        userName: userCredential.user.userName,
-      };
+      // FETCH THE DATA OF THE LOGGED IN USER
+      const userDoc = await getDoc(doc(db, "users", userCredential.user.uid));
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        userData.uid = userCredential.user.uid;
+        dispatch(signinSuccess(userData));
+        dispatch(userSuccess(userData));
+        navigate(`/${userData.uid}/chats/`);
+      } else {
+        console.log("User does not exist");
+      }
 
-      dispatch(signinSuccess(userData));
       console.log("User logged in successfully");
-      navigate(`/${userData.uid}/chats/`);
       reset();
     } catch (err) {
       console.log(`Error while logging in user: ${err.message}`);
       dispatch(signinFailure(err.message));
+      dispatch(userFailure(err.message));
     }
   };
   return (

@@ -4,9 +4,12 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useSelector } from "react-redux";
 
 const RightSideBar = () => {
-  const { userName, avatar } = useSelector(
-    (state) => state.targetUser.targetUser
-  );
+  const targetUser = useSelector((state) => state.targetUser.targetUser);
+  let avatar, userName;
+  if (targetUser) {
+    avatar = targetUser.avatar;
+    userName = targetUser.userName;
+  }
   return (
     <div className="rightSideBar_container">
       <div className="rightSideBar_body">

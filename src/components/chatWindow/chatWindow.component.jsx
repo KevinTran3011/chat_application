@@ -18,16 +18,14 @@ import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import { useSelector } from "react-redux";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-const ChatWindow = ({
-  currentUserId,
-  targetUserId,
-  targetUserName,
-  targetedUserAvatar,
-}) => {
+const ChatWindow = ({ currentUserId, targetUserId, targetUserName }) => {
   const userData = useSelector((state) => state.user.user);
-  const { avatar, userName } = useSelector(
-    (state) => state.targetUser.targetUser
-  );
+  const targetUser = useSelector((state) => state.targetUser.targetUser);
+  let avatar, userName;
+  if (targetUser) {
+    avatar = targetUser.avatar;
+    userName = targetUser.userName;
+  }
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
 

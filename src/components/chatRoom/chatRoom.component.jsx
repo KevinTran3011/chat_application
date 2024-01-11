@@ -10,6 +10,7 @@ import {
   targetUserSuccess,
 } from "../../redux/slice/targetUserSlice";
 import PersonIcon from "@mui/icons-material/Person";
+import { useNavigate } from "react-router-dom";
 import { db } from "../../firebase";
 import { useDispatch } from "react-redux";
 import { getDoc, doc } from "firebase/firestore";
@@ -19,6 +20,7 @@ const ChatRoom = () => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user.user);
   const targetUser = useSelector((state) => state.targetUser);
+  const navigate = useNavigate();
   const { targetUserId, targetUserName, targetUserAvatar } = targetUser;
   const userAvatar = targetUserAvatar ? targetUserAvatar : <PersonIcon />;
 
@@ -30,6 +32,7 @@ const ChatRoom = () => {
       const targetedUserData = targetedUserDoc.data();
 
       dispatch(targetUserSuccess(targetedUserData));
+      navigate(`/${userData.uid}/chats/${targetUserId}`);
     } catch (error) {
       dispatch(targetUserFailure(error));
     }

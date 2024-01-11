@@ -22,7 +22,13 @@ function App() {
             <Route path="/" element={<LogIn></LogIn>}></Route>
             <Route path="/signUp" element={<SignUp></SignUp>}></Route>
             {userData && (
-              <Route path="/:userId/chats/" element={<ChatRoom />}></Route>
+              <>
+                <Route path="/:userId/chats/" element={<ChatRoom />}></Route>
+                <Route
+                  path="/:userId/chats/:targetUserId"
+                  element={<ChatRoom />}
+                ></Route>
+              </>
             )}
             <Route
               path="/:userId/settings"

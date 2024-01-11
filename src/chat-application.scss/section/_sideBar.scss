@@ -65,12 +65,19 @@
   margin-bottom: 10px;
 }
 .sideBar_body {
-  padding: 5px;
+  padding: 0px 5px 5px 5px;
   height: 80%;
   overflow-y: auto;
 
   ul {
     padding-left: 0rem;
+  }
+
+  &_header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background-color: $background_color;
   }
 }
 

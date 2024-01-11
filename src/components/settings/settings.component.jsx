@@ -14,7 +14,7 @@ const Settings = () => {
       <div className="settings_form">
         <div className="settings_header">
           <div className="links_container">
-            <Link className="links_text--room" to="/:userId/chats/">
+            <Link className="links_text--room" to={`/${userData?.uid}/chats/`}>
               <span>
                 <ArrowBackIosIcon></ArrowBackIosIcon>
               </span>{" "}

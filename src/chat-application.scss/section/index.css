@@ -71,12 +71,18 @@ body {
 }
 
 .sideBar_body {
-  padding: 5px;
+  padding: 0px 5px 5px 5px;
   height: 80%;
   overflow-y: auto;
 }
 .sideBar_body ul {
   padding-left: 0rem;
+}
+.sideBar_body_header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background-color: #252525;
 }
 
 .searchSection {

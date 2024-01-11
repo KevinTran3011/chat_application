@@ -31,9 +31,21 @@ const targetUserSlice = createSlice({
       state.status = "failed";
       state.error = action.payload;
     },
+    targetUserLogout: (state) => {
+      state.status = "idle";
+      state.error = null;
+      state.targetUser = null;
+      state.targetUserId = null;
+      state.targetUserName = null;
+      state.targetUserAvatar = null;
+    },
   },
 });
 
-export const { targetUserRequest, targetUserSuccess, targetUserFailure } =
-  targetUserSlice.actions;
+export const {
+  targetUserRequest,
+  targetUserSuccess,
+  targetUserFailure,
+  targetUserLogout,
+} = targetUserSlice.actions;
 export default targetUserSlice.reducer;

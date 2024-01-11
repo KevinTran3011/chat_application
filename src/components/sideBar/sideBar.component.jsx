@@ -8,11 +8,12 @@ import InputComponent from "../Input/input.component";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-
-import { useSelector } from "react-redux";
+import { targetUserLogout } from "../../redux/slice/targetUserSlice";
+import { useSelector, useDispatch } from "react-redux";
 import "bootstrap/dist/css/bootstrap.css";
 
 const SideBar = ({ onSelectUser }) => {
+  const dispatch = useDispatch();
   const userData = useSelector((state) => state.user.user);
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
@@ -30,6 +31,7 @@ const SideBar = ({ onSelectUser }) => {
   const signOutUser = async () => {
     try {
       await auth.signOut();
+      dispatch(targetUserLogout());
       console.log("User signed out successfully");
       navigate("/");
     } catch (err) {
@@ -64,18 +66,21 @@ const SideBar = ({ onSelectUser }) => {
         </div>
       </div>
       <div className="sideBar_body">
-        <div className="sideBar_body_title">
-          <div className="header">Chats</div>
+        <div className="sideBar_body_header">
+          <div className="sideBar_body_title">
+            <div className="header">Chats</div>
+          </div>
+
+          <div className="searchSection" style={{ marginBottom: "15px" }}>
+            <InputComponent
+              className="search_input"
+              type="text"
+              placeholder="Search for contacts"
+              onChange={searchUser}
+            />
+          </div>
         </div>
 
-        <div className="searchSection" style={{ marginBottom: "15px" }}>
-          <InputComponent
-            className="search_input"
-            type="text"
-            placeholder="Search for contacts"
-            onChange={searchUser}
-          />
-        </div>
         <ul>
           {users &&
             users.map((user) => (
@@ -90,7 +95,8 @@ const SideBar = ({ onSelectUser }) => {
         </ul>
       </div>
       <div className="sideBar_footer">
-        <Link to="/:userId/settings">
+        <Link to={`/${userData?.uid}/settings`}>
+          {" "}
           <div className="links_text--room">
             <SettingsIcon className="sideBar_settings--icon" />
             <div className="settings_text">Settings</div>

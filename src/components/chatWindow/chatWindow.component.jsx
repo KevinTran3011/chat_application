@@ -1,24 +1,28 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   collection,
-  doc,
-  getDocs,
   onSnapshot,
   query,
   orderBy,
   addDoc,
 } from "firebase/firestore";
-import { auth, db } from "../../firebase";
+import { db } from "../../firebase";
+import {
+  requestConversation,
+  fetchMessagesSuccess,
+} from "../../redux/slice/chatSlice";
 import InputComponent from "../Input/input.component";
 import Message from "../message/message.component";
 import ChatIcon from "@mui/icons-material/Chat";
 import SendIcon from "@mui/icons-material/Send";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
 const ChatWindow = ({ currentUserId, targetUserId, targetUserName }) => {
+  const dispatch = useDispatch();
+  const chat = useSelector((state) => state.chat);
   const userData = useSelector((state) => state.user.user);
   const targetUser = useSelector((state) => state.targetUser.targetUser);
   let avatar, userName;
@@ -26,39 +30,7 @@ const ChatWindow = ({ currentUserId, targetUserId, targetUserName }) => {
     avatar = targetUser.avatar;
     userName = targetUser.userName;
   }
-  const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
-
-  useEffect(() => {
-    const fetchMessages = async () => {
-      try {
-        if (!currentUserId || !targetUserId) {
-          return;
-        }
-
-        const conversationId = getConversationId(currentUserId, targetUserId);
-
-        const q = query(
-          collection(db, "conversations", conversationId, "messages"),
-          orderBy("timestamp")
-        );
-
-        const unsubscribe = onSnapshot(q, (querySnapshot) => {
-          const data = querySnapshot.docs.map((doc) => ({
-            ...doc.data(),
-            id: doc.id,
-          }));
-          setMessages(data);
-        });
-
-        return unsubscribe;
-      } catch (error) {
-        console.error("Error fetching messages:", error);
-      }
-    };
-
-    fetchMessages();
-  }, [currentUserId, targetUserId]);
 
   const getConversationId = (userId1, userId2) => {
     try {
@@ -69,6 +41,41 @@ const ChatWindow = ({ currentUserId, targetUserId, targetUserName }) => {
       console.error("Error getting conversation ID:", error);
     }
   };
+  useEffect(() => {
+    const fetchMessages = async () => {
+      try {
+        if (!currentUserId || !targetUserId) {
+          return;
+        }
+
+        const conversationId = getConversationId(currentUserId, targetUserId);
+        dispatch(requestConversation(conversationId));
+        const q = query(
+          collection(db, "conversations", conversationId, "messages"),
+          orderBy("timestamp")
+        );
+
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+          const data = querySnapshot.docs.map((doc) => {
+            const timestamp = doc.data().timestamp;
+            return {
+              ...doc.data(),
+              id: doc.id,
+              timestamp:
+                timestamp instanceof Date ? timestamp.toISOString() : timestamp,
+            };
+          });
+          dispatch(fetchMessagesSuccess({ messages: data, conversationId }));
+        });
+
+        return unsubscribe;
+      } catch (error) {
+        console.error("Error fetching messages:", error);
+      }
+    };
+
+    fetchMessages();
+  }, [currentUserId, targetUserId, dispatch]);
 
   const handleSendMessage = async () => {
     console.log("currentUserId:", currentUserId);
@@ -98,7 +105,6 @@ const ChatWindow = ({ currentUserId, targetUserId, targetUserName }) => {
       console.error("Error sending message:", error);
     }
   };
-
   return (
     <div className="chatWindow_container">
       <div className="chatWindow_header">
@@ -131,7 +137,8 @@ const ChatWindow = ({ currentUserId, targetUserId, targetUserName }) => {
             </div>
           </div>
         ) : (
-          messages.map((message) => (
+          chat.messages &&
+          chat.messages.map((message) => (
             <Message
               key={message.id}
               message={message}

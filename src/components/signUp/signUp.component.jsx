@@ -88,8 +88,8 @@ const SignUp = () => {
     <div className="signUp_container">
       <form className="signUp_form" onSubmit={handleSubmit(onSubmit)}>
         <div className="signUp_avatar">
-          <label htmlFor="avatar">
-            <PersonAddIcon />
+          <label className="signUp_avatar--icon" htmlFor="avatar">
+            <PersonAddIcon className="signUp_avatar--icon" />
           </label>
           <InputComponent
             id="avatar"

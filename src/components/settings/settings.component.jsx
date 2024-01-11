@@ -37,7 +37,7 @@ const Settings = () => {
             )}
 
             <div className="settings_information--name">
-              Full name : {userData?.userName}
+              <div className="header">Full name : {userData?.userName}</div>
               <span className="edit_icon">
                 <EditIcon />
               </span>
@@ -49,7 +49,9 @@ const Settings = () => {
             <div className="settings_body--header">
               <div className="header">Change language</div>
             </div>
-            <LanguageIcon sx={{ width: 50, height: 50 }} />
+            <LanguageIcon
+              sx={{ width: 50, height: 50, marginBottom: "15px" }}
+            />
             <div className="header">Current language : </div>
           </div>
           <div className="settings_body--theme">

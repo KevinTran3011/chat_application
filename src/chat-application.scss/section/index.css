@@ -270,4 +270,7 @@ body {
 .settings_container .settings_form .settings_body .settings_body--header {
   text-decoration: underline;
   margin-bottom: 15px;
+}
+.settings_container .settings_form .settings_body--language {
+  gap: 15px;
 }/*# sourceMappingURL=index.css.map */

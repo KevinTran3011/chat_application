@@ -107,8 +107,15 @@
 }
 
 .chatWindow--title {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
   margin-bottom: 18px;
   padding: 10px;
+}
+.chatWindow--title_text {
+  display: flex;
+  align-items: center;
 }
 
 .addIcon,

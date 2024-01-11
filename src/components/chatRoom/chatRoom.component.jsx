@@ -53,6 +53,7 @@ const ChatRoom = () => {
             currentUserId={userData?.uid}
             targetUserId={targetUserId}
             targetUserName={targetUserName}
+            targetedUserAvatar={targetUserAvatar}
             userName={userData?.userName}
             avatar={userData?.avatar}
           />

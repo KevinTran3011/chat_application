@@ -16,9 +16,18 @@ import ChatIcon from "@mui/icons-material/Chat";
 import SendIcon from "@mui/icons-material/Send";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import { useSelector } from "react-redux";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 
-const ChatWindow = ({ currentUserId, targetUserId, targetUserName }) => {
+const ChatWindow = ({
+  currentUserId,
+  targetUserId,
+  targetUserName,
+  targetedUserAvatar,
+}) => {
   const userData = useSelector((state) => state.user.user);
+  const { avatar, userName } = useSelector(
+    (state) => state.targetUser.targetUser
+  );
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
 
@@ -97,7 +106,19 @@ const ChatWindow = ({ currentUserId, targetUserId, targetUserName }) => {
       <div className="chatWindow_header">
         <div className="chatWindow--title">
           {" "}
-          <div className="header">{targetUserName}</div>
+          <div className="chatWindow--title_avatar">
+            {avatar ? (
+              <img
+                src={avatar}
+                style={{ width: "50px", height: "50px", borderRadius: "50%" }}
+              />
+            ) : (
+              <AccountCircleIcon style={{ fontSize: "50px" }} />
+            )}
+          </div>
+          <div className="chatWindow--title_text">
+            <div className="header">{targetUserName}</div>
+          </div>
         </div>
       </div>
       <div className="chatWindow--body">

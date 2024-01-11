@@ -2,15 +2,16 @@
 import React, { useEffect, useState } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import { auth, db } from "../../firebase";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ChatContacts from "../chatContacts/chatContacts.component";
 import InputComponent from "../Input/input.component";
 import SettingsIcon from "@mui/icons-material/Settings";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import "bootstrap/dist/css/bootstrap.css";
 
 const SideBar = ({ onSelectUser }) => {
+  const userData = useSelector((state) => state.user.user);
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
   useEffect(() => {
@@ -38,7 +39,13 @@ const SideBar = ({ onSelectUser }) => {
     <div className="sideBar_container">
       <div className="sideBar_title">
         <div className="sideBar_header">
-          <div className="header">Side Bar</div>
+          <div className="signedInUser_name">{userData.userName}</div>
+          <div className="signedInUser_avatar">
+            <img
+              src={userData.avatar}
+              style={{ width: "30px", height: "30px", borderRadius: "50%" }}
+            />
+          </div>
         </div>
         <div className="searchSection">
           <InputComponent

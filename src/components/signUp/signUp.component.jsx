@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   signupRequest,
@@ -26,6 +27,21 @@ const SignUp = () => {
   const { register, handleSubmit, reset, control } = useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [avatar, setAvatar] = useState(null);
+  const [avatarFile, setAvatarFile] = useState(null);
+
+  useEffect(() => {
+    if (avatarFile) {
+      const objectUrl = URL.createObjectURL(avatarFile);
+      setAvatar(<img className="signUp_avatar--icon" src={objectUrl} />);
+    } else {
+      setAvatar(<PersonAddIcon className="signUp_avatar--icon" />);
+    }
+  }, [avatarFile]);
+
+  const handleAvatarChange = (event) => {
+    setAvatarFile(event.target.files[0]);
+  };
 
   const onSubmit = async (data) => {
     console.log("onSubmit called with data:", data);
@@ -45,7 +61,7 @@ const SignUp = () => {
       // Upload avatar to Firebase Storage
       const storage = getStorage();
       const avatarRef = ref(storage, `avatars/${userId}`);
-      const uploadTask = uploadBytesResumable(avatarRef, data.avatar[0]);
+      const uploadTask = uploadBytesResumable(avatarRef, avatarFile);
 
       uploadTask.on(
         "state_changed",
@@ -88,8 +104,12 @@ const SignUp = () => {
     <div className="signUp_container">
       <form className="signUp_form" onSubmit={handleSubmit(onSubmit)}>
         <div className="signUp_avatar">
-          <label className="signUp_avatar--icon" htmlFor="avatar">
-            <PersonAddIcon className="signUp_avatar--icon" />
+          <label
+            className="signUp_avatar--icon"
+            htmlFor="avatar"
+            style={{ width: "100px", height: "100px" }}
+          >
+            {avatar}
           </label>
           <InputComponent
             id="avatar"
@@ -98,6 +118,7 @@ const SignUp = () => {
             style={{ display: "none" }}
             {...register("avatar", { required: "Please upload an avatar" })}
             placeholder="Avatar"
+            onChange={handleAvatarChange}
           />
         </div>
 

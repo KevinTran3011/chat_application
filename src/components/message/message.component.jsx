@@ -1,4 +1,7 @@
 /* eslint-disable react/prop-types */
+
+import { useSelector } from "react-redux";
+
 const Message = ({ message, currentUserId }) => {
   return (
     <div

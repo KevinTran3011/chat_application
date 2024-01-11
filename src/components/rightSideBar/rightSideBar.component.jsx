@@ -30,11 +30,11 @@ const RightSideBar = () => {
         <div className="rightSideBar_contents">
           <div className="rightSideBar_contents--settings">
             <SettingsIcon sx={{ width: 50, height: 50 }} />
-            <div className="settings_text">Settings</div>
+            <div className="header">Settings</div>
           </div>
           <div className="rightSideBar_contents--search">
             <SearchIcon sx={{ width: 50, height: 50 }} />
-            <div className="search_text">Search in conversation</div>
+            <div className="header">Search in conversation</div>
           </div>
         </div>
       </div>

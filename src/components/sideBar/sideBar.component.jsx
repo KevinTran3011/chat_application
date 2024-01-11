@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
-import { getDocs, collection } from "firebase/firestore";
+import { getDocs, collection, getDoc } from "firebase/firestore";
 import { auth, db } from "../../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import ChatContacts from "../chatContacts/chatContacts.component";
@@ -37,6 +37,15 @@ const SideBar = ({ onSelectUser }) => {
     }
   };
 
+  const searchUser = async (event) => {
+    const searchValue = event.target.value.toLowerCase();
+    const usersCollection = await getDocs(collection(db, "users"));
+    const filteredUsers = usersCollection.docs
+      .map((doc) => ({ ...doc.data(), id: doc.id }))
+      .filter((user) => user.userName.toLowerCase().includes(searchValue));
+    setUsers(filteredUsers);
+  };
+
   return (
     <div className="sideBar_container">
       <div className="sideBar_title">
@@ -64,6 +73,7 @@ const SideBar = ({ onSelectUser }) => {
             className="search_input"
             type="text"
             placeholder="Search for contacts"
+            onChange={searchUser}
           />
         </div>
         <ul>

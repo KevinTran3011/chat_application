@@ -7,8 +7,7 @@ body {
   letter-spacing: 0.4;
 }
 
-.title,
-.title--form {
+.title, .title--form {
   font-size: 24px;
   font-weight: 600;
 }
@@ -16,8 +15,7 @@ body {
   align-self: flex-start;
 }
 
-.links_text,
-.links_text--room {
+.links_text, .links_text--room {
   font-size: 16px;
   color: #47ace4;
 }
@@ -30,8 +28,7 @@ body {
   font-weight: 600;
 }
 
-.input_Form,
-.input_Form--header {
+.input_Form, .input_Form--header {
   font-size: 21px;
   font-weight: 600;
 }
@@ -112,7 +109,7 @@ body {
   font-weight: 600;
 }
 .chatWindow--empty .chatWindow--empty_text {
-  line-height: 1.5;
+  spacing: 1.5;
 }
 
 .chatWindow_input {
@@ -167,11 +164,7 @@ body {
   background: #47ace4;
 }
 
-.message_container,
-.message_container--receiver,
-.message_container--receiver_text,
-.message_container--sender,
-.message_container--sender_text {
+.message_container, .message_container--receiver, .message_container--receiver_text, .message_container--sender, .message_container--sender_text {
   display: flex;
   align-items: center;
   color: #fff;
@@ -179,8 +172,7 @@ body {
   margin-bottom: 10px;
   gap: 10px;
 }
-.message_container--sender,
-.message_container--sender_text {
+.message_container--sender, .message_container--sender_text {
   align-self: flex-end;
   border-radius: 15px;
   padding: 10px;
@@ -190,8 +182,7 @@ body {
   background-color: #5ce1e6;
   border: 3px solid #fff;
 }
-.message_container--receiver,
-.message_container--receiver_text {
+.message_container--receiver, .message_container--receiver_text {
   align-self: flex-start;
   border-radius: 15px;
   padding: 10px;
@@ -431,9 +422,7 @@ body {
   align-self: center;
 }
 
-.rightSideBar_contents,
-.rightSideBar_contents--search,
-.rightSideBar_contents--settings {
+.rightSideBar_contents, .rightSideBar_contents--search, .rightSideBar_contents--settings {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -462,6 +451,18 @@ body {
   gap: 50px;
   flex-direction: row;
   margin-bottom: 25px;
+}
+.settings_container .settings_information--name {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 25px;
+}
+.settings_container .settings_information--name--input {
+  width: 80%;
+  padding: 5px;
+  border: 5px solid #5ce1e6;
+  margin-bottom: 10px;
 }
 .settings_container .settings_information--avatar {
   position: relative;
@@ -496,4 +497,4 @@ body {
 }
 .settings_container .settings_form .settings_body--language {
   gap: 15px;
-} /*# sourceMappingURL=main.css.map */
+}/*# sourceMappingURL=main.css.map */

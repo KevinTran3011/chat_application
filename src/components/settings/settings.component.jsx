@@ -3,7 +3,7 @@ import LanguageIcon from "@mui/icons-material/Language";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import EditIcon from "@mui/icons-material/Edit";
 import { useSelector } from "react-redux";
-
+import { useState } from "react";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import {
   getStorage,
@@ -21,6 +21,7 @@ import {
   deleteUserAvatar,
   updateUserName,
 } from "../../redux/slice/userSlice";
+import InputComponent from "../Input/input.component";
 import UpdateIcon from "@mui/icons-material/Update";
 import ClearIcon from "@mui/icons-material/Clear";
 import Swal from "sweetalert2";
@@ -29,6 +30,8 @@ import "../../chat-application.scss/main.css";
 const Settings = () => {
   const targetUserId = useSelector((state) => state.targetUser.targetUserId);
   const userData = useSelector((state) => state.user.user);
+  const [newUserName, setNewUserName] = useState("");
+  const [isEditingUserName, setIsEditingUserName] = useState(false);
   const dispatch = useDispatch();
   const storage = getStorage();
 
@@ -95,12 +98,16 @@ const Settings = () => {
   };
 
   const handleChangeUserName = () => {
-    const currentUserName = userData?.userName;
-    const newUserName = prompt("Enter new username", currentUserName);
-    if (newUserName) {
+    setIsEditingUserName(true);
+  };
+
+  const handleUserNameSubmit = (e) => {
+    if (e.key === "Enter" && newUserName) {
       const userDoc = doc(db, "users", userData?.uid);
       setDoc(userDoc, { userName: newUserName }, { merge: true });
       dispatch(updateUserName(newUserName));
+      console.log("successfully edited the userName to", newUserName);
+      setIsEditingUserName(false);
     }
   };
 
@@ -155,7 +162,20 @@ const Settings = () => {
             </div>
 
             <div className="settings_information--name">
-              <div className="header">Full name : {userData?.userName}</div>
+              <div className="header">
+                Full name :
+                {isEditingUserName ? (
+                  <InputComponent
+                    className="settings_information--name--input"
+                    value={newUserName}
+                    onChange={(e) => setNewUserName(e.target.value)}
+                    onKeyDown={handleUserNameSubmit}
+                    placeholder="Enter the new user name"
+                  />
+                ) : (
+                  userData?.userName
+                )}
+              </div>
               <span
                 className="edit_icon"
                 onClick={() => {

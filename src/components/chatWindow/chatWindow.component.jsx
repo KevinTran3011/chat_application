@@ -13,19 +13,27 @@ import {
   fetchMessagesSuccess,
 } from "../../redux/slice/chatSlice";
 import InputComponent from "../Input/input.component";
+
 import Message from "../message/message.component";
 import ChatIcon from "@mui/icons-material/Chat";
 import SendIcon from "@mui/icons-material/Send";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import { useSelector, useDispatch } from "react-redux";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import getStorage from "redux-persist/es/storage/getStorage";
+import {
+  getStorage,
+  uploadBytesResumable,
+  ref as createStorageRef,
+  deleteObject,
+  getDownloadURL,
+} from "firebase/storage";
 
 const ChatWindow = ({ currentUserId, targetUserId }) => {
   const dispatch = useDispatch();
   const chat = useSelector((state) => state.chat);
   const userData = useSelector((state) => state.user.user);
   const targetUser = useSelector((state) => state.targetUser.targetUser);
+  const ref = useRef(null);
   const storage = getStorage();
   const fileInputRef = useRef(null);
 
@@ -35,6 +43,7 @@ const ChatWindow = ({ currentUserId, targetUserId }) => {
     userName = targetUser.userName;
   }
   const [newMessage, setNewMessage] = useState("");
+  const [fileUploaded, setFileUploaded] = useState(false);
 
   const getConversationId = (userId1, userId2) => {
     try {
@@ -45,6 +54,7 @@ const ChatWindow = ({ currentUserId, targetUserId }) => {
       console.error("Error getting conversation ID:", error);
     }
   };
+
   useEffect(() => {
     const fetchMessages = async () => {
       try {
@@ -82,33 +92,69 @@ const ChatWindow = ({ currentUserId, targetUserId }) => {
   }, [currentUserId, targetUserId, dispatch]);
 
   const handleSendMessage = async () => {
-    console.log("currentUserId:", currentUserId);
-    console.log("targetUserId:", targetUserId);
-    console.log("newMessage:", newMessage);
-
     try {
-      if (!currentUserId || !targetUserId || !newMessage) {
+      if (!currentUserId || !targetUserId) {
         console.log("Invalid parameters for sending message");
         return;
       }
 
       const conversationId = getConversationId(currentUserId, targetUserId);
 
-      await addDoc(
-        collection(db, "conversations", conversationId, "messages"),
-        {
-          text: newMessage,
-          timestamp: new Date(),
-          userId: currentUserId,
-          targetUserId: targetUserId,
-        }
-      );
+      if (fileInputRef.current.files.length > 0 && !fileUploaded) {
+        await handleFileChange(fileInputRef.current.files[0]);
+      }
 
-      setNewMessage("");
+      if (newMessage || fileInputRef.current.files.length > 0) {
+        await addDoc(
+          collection(db, "conversations", conversationId, "messages"),
+          {
+            text: newMessage.startsWith("http") ? null : newMessage,
+            file: newMessage.startsWith("http")
+              ? newMessage
+              : fileInputRef.current.files.length > 0
+              ? newMessage.startsWith("http")
+              : null,
+            timestamp: new Date(),
+            userId: currentUserId,
+            targetUserId: targetUserId,
+          }
+        );
+
+        setNewMessage("");
+        fileInputRef.current.value = "";
+      }
     } catch (error) {
       console.error("Error sending message:", error);
     }
   };
+
+  const handleFileChange = async (file) => {
+    const storageRef = createStorageRef(storage, "chatFiles/" + file.name);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    return new Promise((resolve, reject) => {
+      uploadTask.on(
+        "state_changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log("Upload is " + progress + "% done");
+        },
+        (error) => {
+          console.error("Error uploading file:", error);
+          reject(error);
+        },
+        () => {
+          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+            console.log("File available at", downloadURL);
+            setNewMessage(downloadURL);
+            setFileUploaded(true);
+          });
+        }
+      );
+    });
+  };
+
   return (
     <div className="chatWindow_container">
       <div className="chatWindow_header">
@@ -161,7 +207,7 @@ const ChatWindow = ({ currentUserId, targetUserId }) => {
               type="file"
               className="settings_information--avatar--input"
               ref={fileInputRef}
-              // onChange={handleFileChange}
+              onChange={(e) => handleFileChange(e.target.files[0])}
               style={{ display: "none" }}
             />
           </div>

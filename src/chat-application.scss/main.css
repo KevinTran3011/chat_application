@@ -191,6 +191,12 @@ body {
   background-color: #f5d547;
   border: 3px solid #fff;
 }
+.message_container .message_file_link, .message_container--sender .message_file_link, .message_container--sender_text .message_file_link, .message_container--receiver .message_file_link, .message_container--receiver_text .message_file_link {
+  display: block;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  width: 100%;
+}
 
 body {
   background-color: #252525;

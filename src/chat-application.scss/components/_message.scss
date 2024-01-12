@@ -32,4 +32,11 @@
       border: 3px solid $main_color;
     }
   }
+
+  .message_file_link {
+    display: block;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    width: 100%;
+  }
 }

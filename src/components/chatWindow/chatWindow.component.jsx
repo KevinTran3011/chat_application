@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   collection,
   onSnapshot,
@@ -27,6 +27,7 @@ const ChatWindow = ({ currentUserId, targetUserId }) => {
   const userData = useSelector((state) => state.user.user);
   const targetUser = useSelector((state) => state.targetUser.targetUser);
   const storage = getStorage();
+  const fileInputRef = useRef(null);
 
   let avatar, userName;
   if (targetUser) {
@@ -155,13 +156,13 @@ const ChatWindow = ({ currentUserId, targetUserId }) => {
       <div className="chatWindow_input">
         <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1">
           <div className="addIcon">
-            <label htmlFor="message_fileInput">
-              <ControlPointIcon></ControlPointIcon>
-            </label>
+            <ControlPointIcon onClick={() => fileInputRef.current.click()} />{" "}
             <input
-              style={{ display: "none" }}
-              className="message_fileInput"
               type="file"
+              className="settings_information--avatar--input"
+              ref={fileInputRef}
+              // onChange={handleFileChange}
+              style={{ display: "none" }}
             />
           </div>
         </div>

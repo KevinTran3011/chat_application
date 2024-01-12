@@ -9,12 +9,21 @@ import "../../chat-application.scss/main.css";
 
 const Settings = () => {
   const userData = useSelector((state) => state.user.user);
+  const targetUserId = useSelector((state) => state.targetUser.targetUserId);
+
   return (
     <div className="settings_container">
       <div className="settings_form">
         <div className="settings_header">
           <div className="links_container">
-            <Link className="links_text--room" to={`/${userData?.uid}/chats/`}>
+            <Link
+              className="links_text--room"
+              to={
+                targetUserId
+                  ? `/${userData?.uid}/chats/${targetUserId}`
+                  : `/${userData?.uid}/chats/`
+              }
+            >
               <span>
                 <ArrowBackIosIcon></ArrowBackIosIcon>
               </span>{" "}

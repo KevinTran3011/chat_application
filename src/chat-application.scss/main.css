@@ -164,25 +164,31 @@ body {
   background: #47ace4;
 }
 
-.message_container, .message_container--receiver, .message_container--sender {
+.message_container, .message_container--receiver, .message_container--receiver_text, .message_container--sender, .message_container--sender_text {
   display: flex;
   align-items: center;
-  border: 3px solid #fff;
   color: #fff;
   max-width: 250px;
   margin-bottom: 10px;
+  gap: 10px;
 }
-.message_container--sender {
+.message_container--sender, .message_container--sender_text {
   align-self: flex-end;
   border-radius: 15px;
   padding: 10px;
-  background-color: #5ce1e6;
 }
-.message_container--receiver {
+.message_container--sender_text {
+  background-color: #5ce1e6;
+  border: 3px solid #fff;
+}
+.message_container--receiver, .message_container--receiver_text {
   align-self: flex-start;
   border-radius: 15px;
   padding: 10px;
+}
+.message_container--receiver_text {
   background-color: #f5d547;
+  border: 3px solid #fff;
 }
 
 body {

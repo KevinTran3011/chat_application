@@ -34,24 +34,35 @@ const Message = ({ message, currentUserId }) => {
     >
       {senderData && (
         <>
-          <div>
+          <div className="message_container--avatar">
             {senderData.avatar ? (
               <img
                 src={senderData.avatar}
                 style={{
-                  width: "30px",
-                  height: "30px",
+                  width: "40px",
+                  height: "40px",
                   borderRadius: "50%",
                   marginRight: "8px",
                 }}
                 alt="Sender Avatar"
               />
             ) : (
-              <AccountCircleIcon style={{ fontSize: "30px" }} />
+              <AccountCircleIcon style={{ fontSize: "40px" }} />
             )}
           </div>
-          <div>
-            <strong>{senderData.userName}</strong>: {message.text}
+          <div className="message_container--text">
+            <div className="message_container--userName">
+              {senderData.userName}
+            </div>
+            <div
+              className={
+                message.userId === currentUserId
+                  ? "message_container--sender_text"
+                  : "message_container--receiver_text"
+              }
+            >
+              {message.text}
+            </div>
           </div>
         </>
       )}

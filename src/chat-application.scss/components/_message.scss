@@ -3,23 +3,32 @@
 
 .message_container {
   @include flex_center;
-  border: 3px solid $main_color;
   color: $main_color;
   max-width: 250px;
   margin-bottom: 10px;
+  gap: 10px;
 
   &--sender {
     @extend .message_container;
     align-self: flex-end;
     border-radius: 15px;
     padding: 10px;
-    background-color: $box_outline;
+    &_text {
+      @extend .message_container--sender;
+      background-color: $box_outline;
+      border: 3px solid $main_color;
+    }
   }
   &--receiver {
     @extend .message_container;
     align-self: flex-start;
     border-radius: 15px;
     padding: 10px;
-    background-color: $yellow;
+
+    &_text {
+      @extend .message_container--receiver;
+      background-color: $yellow;
+      border: 3px solid $main_color;
+    }
   }
 }

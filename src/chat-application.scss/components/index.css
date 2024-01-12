@@ -10,6 +10,7 @@
   align-self: flex-end;
   border-radius: 15px;
   padding: 10px;
+  flex-direction: row-reverse;
 }
 .message_container--sender_text {
   background-color: #5ce1e6;

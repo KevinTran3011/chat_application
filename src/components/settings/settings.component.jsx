@@ -19,6 +19,7 @@ import { doc, setDoc } from "firebase/firestore";
 import {
   updateUserAvatar,
   deleteUserAvatar,
+  updateUserName,
 } from "../../redux/slice/userSlice";
 import UpdateIcon from "@mui/icons-material/Update";
 import ClearIcon from "@mui/icons-material/Clear";
@@ -92,6 +93,17 @@ const Settings = () => {
       preConfirm: () => deleteAvatar(userData?.uid),
     });
   };
+
+  const handleChangeUserName = () => {
+    const currentUserName = userData?.userName;
+    const newUserName = prompt("Enter new username", currentUserName);
+    if (newUserName) {
+      const userDoc = doc(db, "users", userData?.uid);
+      setDoc(userDoc, { userName: newUserName }, { merge: true });
+      dispatch(updateUserName(newUserName));
+    }
+  };
+
   return (
     <div className="settings_container">
       <div className="settings_form">
@@ -144,7 +156,12 @@ const Settings = () => {
 
             <div className="settings_information--name">
               <div className="header">Full name : {userData?.userName}</div>
-              <span className="edit_icon">
+              <span
+                className="edit_icon"
+                onClick={() => {
+                  handleChangeUserName();
+                }}
+              >
                 <EditIcon />
               </span>
             </div>

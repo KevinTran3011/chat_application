@@ -21,7 +21,7 @@ import { useSelector, useDispatch } from "react-redux";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import getStorage from "redux-persist/es/storage/getStorage";
 
-const ChatWindow = ({ currentUserId, targetUserId, targetUserName }) => {
+const ChatWindow = ({ currentUserId, targetUserId }) => {
   const dispatch = useDispatch();
   const chat = useSelector((state) => state.chat);
   const userData = useSelector((state) => state.user.user);
@@ -124,7 +124,7 @@ const ChatWindow = ({ currentUserId, targetUserId, targetUserName }) => {
             )}
           </div>
           <div className="chatWindow--title_text">
-            <div className="header">{targetUserName}</div>
+            <div className="header">{userName}</div>
           </div>
         </div>
       </div>

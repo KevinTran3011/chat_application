@@ -8,14 +8,11 @@ import {
   signinRequest,
   signinFailure,
   signinSuccess,
-  signoutFailure,
-  signoutSuccess,
 } from "../../redux/slice/authSlice";
 import {
   userRequest,
   userSuccess,
   userFailure,
-  userLogout,
 } from "../../redux/slice/userSlice";
 import PersonIcon from "@mui/icons-material/Person";
 import { auth, db } from "../../firebase";
@@ -23,7 +20,6 @@ import { useNavigate } from "react-router-dom";
 import "../../chat-application.scss/main.css";
 import { DevTool } from "@hookform/devtools";
 import { Link } from "react-router-dom";
-import { Input } from "@mui/icons-material";
 
 const LogIn = () => {
   const {

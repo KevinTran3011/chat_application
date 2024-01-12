@@ -22,6 +22,8 @@ import {
   updateUserName,
 } from "../../redux/slice/userSlice";
 import InputComponent from "../Input/input.component";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import UpdateIcon from "@mui/icons-material/Update";
 import ClearIcon from "@mui/icons-material/Clear";
 import Swal from "sweetalert2";
@@ -34,6 +36,14 @@ const Settings = () => {
   const [isEditingUserName, setIsEditingUserName] = useState(false);
   const dispatch = useDispatch();
   const storage = getStorage();
+
+  const showAvatarUpdateMessageSuccess = () => {
+    toast.success("Successfully updated the avatar", {
+      position: "bottom-center",
+      theme: "dark",
+      autoClose: 1000,
+    });
+  };
 
   const fileInputRef = useRef(null);
 
@@ -70,6 +80,8 @@ const Settings = () => {
 
             const userDoc = doc(db, "users", userId);
             setDoc(userDoc, { avatar: downloadURL }, { merge: true });
+            showAvatarUpdateMessageSuccess();
+
             dispatch(updateUserAvatar(downloadURL));
             resolve(downloadURL);
           });
@@ -145,7 +157,7 @@ const Settings = () => {
               ) : (
                 <AccountCircleIcon sx={{ width: 200, height: 200 }} />
               )}
-
+              <ToastContainer />
               <div className="settings_information--avatar--update">
                 <UpdateIcon onClick={handleUpdateAvatarClick}></UpdateIcon>
                 <input

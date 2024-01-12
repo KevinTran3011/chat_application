@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   user: null,
@@ -31,9 +31,21 @@ const userSlice = createSlice({
       state.error = null;
       state.user = null;
     },
+    updateUserAvatar: (state, action) => {
+      state.user.avatar = action.payload;
+    },
+    deleteUserAvatar: (state) => {
+      state.user.avatar = null;
+    },
   },
 });
 
-export const { userRequest, userSuccess, userFailure, userLogout } =
-  userSlice.actions;
+export const {
+  userRequest,
+  userSuccess,
+  userFailure,
+  userLogout,
+  updateUserAvatar,
+  deleteUserAvatar,
+} = userSlice.actions;
 export default userSlice.reducer;

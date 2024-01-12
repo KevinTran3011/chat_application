@@ -19,12 +19,15 @@ import SendIcon from "@mui/icons-material/Send";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import { useSelector, useDispatch } from "react-redux";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import getStorage from "redux-persist/es/storage/getStorage";
 
 const ChatWindow = ({ currentUserId, targetUserId, targetUserName }) => {
   const dispatch = useDispatch();
   const chat = useSelector((state) => state.chat);
   const userData = useSelector((state) => state.user.user);
   const targetUser = useSelector((state) => state.targetUser.targetUser);
+  const storage = getStorage();
+
   let avatar, userName;
   if (targetUser) {
     avatar = targetUser.avatar;
@@ -152,7 +155,14 @@ const ChatWindow = ({ currentUserId, targetUserId, targetUserName }) => {
       <div className="chatWindow_input">
         <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1">
           <div className="addIcon">
-            <ControlPointIcon></ControlPointIcon>
+            <label htmlFor="message_fileInput">
+              <ControlPointIcon></ControlPointIcon>
+            </label>
+            <input
+              style={{ display: "none" }}
+              className="message_fileInput"
+              type="file"
+            />
           </div>
         </div>
         <div className="col-lg-10 col-md-10 col-sm-10 col-xs-10">

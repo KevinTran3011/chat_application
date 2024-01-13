@@ -49,6 +49,14 @@
   bottom: 0;
   margin-top: 15px;
 
+  .imagePreview {
+    position: absolute;
+    top: -120px;
+    left: 0;
+    max-width: 200px;
+    max-height: 200px;
+  }
+
   .inputField {
     width: 100%;
   }

@@ -33,6 +33,7 @@ const ChatWindow = ({ currentUserId, targetUserId }) => {
   const chat = useSelector((state) => state.chat);
   const userData = useSelector((state) => state.user.user);
   const targetUser = useSelector((state) => state.targetUser.targetUser);
+  const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
   const ref = useRef(null);
   const storage = getStorage();
   const fileInputRef = useRef(null);
@@ -138,6 +139,7 @@ const ChatWindow = ({ currentUserId, targetUserId }) => {
 
         setNewMessage("");
         fileInputRef.current.value = "";
+        setImagePreviewUrl(null);
       }
     } catch (error) {
       console.error("Error sending message:", error);
@@ -146,6 +148,10 @@ const ChatWindow = ({ currentUserId, targetUserId }) => {
   const handleFileChange = async (file) => {
     const storageRef = createStorageRef(storage, "chatFiles/" + file.name);
     const uploadTask = uploadBytesResumable(storageRef, file);
+
+    if (file.type.startsWith("image")) {
+      setImagePreviewUrl(URL.createObjectURL(file));
+    }
 
     return new Promise((resolve, reject) => {
       uploadTask.on(
@@ -215,6 +221,9 @@ const ChatWindow = ({ currentUserId, targetUserId }) => {
       </div>
 
       <div className="chatWindow_input">
+        {imagePreviewUrl && (
+          <img src={imagePreviewUrl} alt="Preview" className="imagePreview" />
+        )}
         <div className="col-lg-1 col-md-1 col-sm-1 col-xs-1">
           <div className="addIcon">
             <ControlPointIcon onClick={() => fileInputRef.current.click()} />{" "}

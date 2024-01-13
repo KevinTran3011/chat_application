@@ -105,15 +105,31 @@ const ChatWindow = ({ currentUserId, targetUserId }) => {
       }
 
       if (newMessage || fileInputRef.current.files.length > 0) {
+        let messageContent = {};
+        if (fileInputRef.current.files.length > 0) {
+          const fileType = fileInputRef.current.files[0].type;
+          if (fileType.startsWith("image")) {
+            messageContent = {
+              file: newMessage,
+              text: null,
+              fileType: fileType, // add this line
+            };
+          } else {
+            messageContent = {
+              file: null,
+              text: newMessage,
+            };
+          }
+        } else {
+          messageContent = {
+            text: newMessage,
+          };
+        }
+
         await addDoc(
           collection(db, "conversations", conversationId, "messages"),
           {
-            text: newMessage.startsWith("http") ? null : newMessage,
-            file: newMessage.startsWith("http")
-              ? newMessage
-              : fileInputRef.current.files.length > 0
-              ? newMessage.startsWith("http")
-              : null,
+            ...messageContent,
             timestamp: new Date(),
             userId: currentUserId,
             targetUserId: targetUserId,
@@ -127,7 +143,6 @@ const ChatWindow = ({ currentUserId, targetUserId }) => {
       console.error("Error sending message:", error);
     }
   };
-
   const handleFileChange = async (file) => {
     const storageRef = createStorageRef(storage, "chatFiles/" + file.name);
     const uploadTask = uploadBytesResumable(storageRef, file);

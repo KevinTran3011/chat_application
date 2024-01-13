@@ -10,7 +10,6 @@ const Message = ({ message, currentUserId }) => {
   const userData = useSelector((state) => state.user.user);
 
   useEffect(() => {
-    console.log("Message ID:", message.id);
     const fetchSenderData = async () => {
       try {
         const senderDocRef = doc(db, "users", message.userId);
@@ -25,6 +24,32 @@ const Message = ({ message, currentUserId }) => {
 
     fetchSenderData();
   }, []);
+
+  const renderFile = () => {
+    if (message.file) {
+      if (message.fileType && message.fileType.startsWith("image")) {
+        return (
+          <img
+            src={message.file}
+            alt="Message Attachment"
+            style={{ maxWidth: "100%" }}
+          />
+        );
+      } else {
+        return (
+          <a
+            className="message_file_link"
+            href={message.file}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {message.file}
+          </a>
+        );
+      }
+    }
+    return null;
+  };
 
   return (
     <div
@@ -64,16 +89,7 @@ const Message = ({ message, currentUserId }) => {
               }
             >
               {message.text}
-              {message.file && (
-                <a
-                  className="message_file_link"
-                  href={message.file}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {message.file}
-                </a>
-              )}
+              {renderFile()}
             </div>
           </div>
         </>

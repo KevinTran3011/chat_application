@@ -37,6 +37,17 @@ const ChatWindow = ({ currentUserId, targetUserId }) => {
   const ref = useRef(null);
   const storage = getStorage();
   const fileInputRef = useRef(null);
+  const messagesEndRef = useRef(null);
+
+  // ALWAYS SCROLLED TO THE BOTTOM
+
+  useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [chat.messages]);
+
+  // SET THE USER NAME AND TARGET USER NAME
 
   let avatar, userName;
   if (targetUser) {
@@ -218,6 +229,7 @@ const ChatWindow = ({ currentUserId, targetUserId }) => {
             />
           ))
         )}
+        <div ref={messagesEndRef} />
       </div>
 
       <div className="chatWindow_input">

@@ -236,6 +236,7 @@ const ChatWindow = ({ currentUserId, targetUserId }) => {
               message={message}
               currentUserId={currentUserId}
               targetUserId={targetUserId}
+              conversationId={chat.conversationId}
             />
           ))
         )}

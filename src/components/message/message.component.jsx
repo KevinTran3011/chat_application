@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import DeleteIcon from "@mui/icons-material/Delete";
 
-const Message = ({ message, currentUserId }) => {
+const Message = ({ message, currentUserId, conversationId }) => {
   const [senderData, setSenderData] = useState(null);
   const userData = useSelector((state) => state.user.user);
 
@@ -51,6 +52,26 @@ const Message = ({ message, currentUserId }) => {
     return null;
   };
 
+  const deleteMessage = async () => {
+    if (!message.id) {
+      console.log("Cannot delete message: No ID found");
+      return;
+    }
+
+    try {
+      const docRef = await doc(
+        db,
+        "conversations",
+        conversationId,
+        "messages",
+        message.id
+      );
+      await deleteDoc(docRef);
+      console.log("Message deleted successfully");
+    } catch (err) {
+      console.log("Error deleting message:", err.message);
+    }
+  };
   return (
     <div
       className={
@@ -91,6 +112,11 @@ const Message = ({ message, currentUserId }) => {
               {message.text}
               {renderFile()}
             </div>
+          </div>
+          <div className="message_container--delete">
+            {message.userId === currentUserId && (
+              <DeleteIcon onClick={deleteMessage} />
+            )}
           </div>
         </>
       )}

@@ -34,17 +34,23 @@ const ChatWindow = ({ currentUserId, targetUserId }) => {
   const userData = useSelector((state) => state.user.user);
   const targetUser = useSelector((state) => state.targetUser.targetUser);
   const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
+  const [fileUrl, setFileUrl] = useState(null);
   const ref = useRef(null);
   const storage = getStorage();
   const fileInputRef = useRef(null);
   const messagesEndRef = useRef(null);
 
   // ALWAYS SCROLLED TO THE BOTTOM
-
   useEffect(() => {
-    if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
-    }
+    const scrollToBottom = () => {
+      if (messagesEndRef.current) {
+        messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+      }
+    };
+
+    const timerId = setTimeout(scrollToBottom, 1500);
+
+    return () => clearTimeout(timerId);
   }, [chat.messages]);
 
   // SET THE USER NAME AND TARGET USER NAME
@@ -92,6 +98,8 @@ const ChatWindow = ({ currentUserId, targetUserId }) => {
             };
           });
           dispatch(fetchMessagesSuccess({ messages: data, conversationId }));
+
+          // Scroll to bottom after messages are fetched and dispatched
         });
 
         return unsubscribe;
@@ -122,14 +130,15 @@ const ChatWindow = ({ currentUserId, targetUserId }) => {
           const fileType = fileInputRef.current.files[0].type;
           if (fileType.startsWith("image")) {
             messageContent = {
-              file: newMessage,
+              file: fileUrl,
               text: null,
-              fileType: fileType, // add this line
+              fileType: fileType,
             };
           } else {
             messageContent = {
-              file: null,
+              file: fileUrl,
               text: newMessage,
+              fileType: fileType,
             };
           }
         } else {
@@ -149,6 +158,7 @@ const ChatWindow = ({ currentUserId, targetUserId }) => {
         );
 
         setNewMessage("");
+        setFileUrl(null);
         fileInputRef.current.value = "";
         setImagePreviewUrl(null);
       }
@@ -179,7 +189,7 @@ const ChatWindow = ({ currentUserId, targetUserId }) => {
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
             console.log("File available at", downloadURL);
-            setNewMessage(downloadURL);
+            setFileUrl(downloadURL);
             setFileUploaded(true);
           });
         }
@@ -207,7 +217,7 @@ const ChatWindow = ({ currentUserId, targetUserId }) => {
           </div>
         </div>
       </div>
-      <div className="chatWindow--body">
+      <div className="chatWindow--body" ref={ref}>
         {!targetUserId ? (
           <div className="chatWindow--empty">
             <div className="chatWindow--empty_icon">

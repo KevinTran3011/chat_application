@@ -5,10 +5,16 @@ import { doc, getDoc, deleteDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import DeleteIcon from "@mui/icons-material/Delete";
+import SweetAlert2 from "react-sweetalert2";
 
-const Message = ({ message, currentUserId, conversationId }) => {
+const Message = ({ message, currentUserId, conversationId, searchValue }) => {
   const [senderData, setSenderData] = useState(null);
   const userData = useSelector((state) => state.user.user);
+
+  const isHighlighted =
+    searchValue &&
+    message.text &&
+    message.text.toLowerCase().includes(searchValue.toLowerCase());
 
   useEffect(() => {
     const fetchSenderData = async () => {
@@ -25,6 +31,8 @@ const Message = ({ message, currentUserId, conversationId }) => {
 
     fetchSenderData();
   }, []);
+
+  const deleteMessagePopUP = () => {};
 
   const renderFile = () => {
     if (message.file) {
@@ -108,6 +116,7 @@ const Message = ({ message, currentUserId, conversationId }) => {
                   ? "message_container--sender_text"
                   : "message_container--receiver_text"
               }
+              style={isHighlighted ? { backgroundColor: "yellow" } : {}}
             >
               {message.text}
               {renderFile()}

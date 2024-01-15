@@ -15,6 +15,7 @@ import { db } from "../../firebase";
 import { useDispatch } from "react-redux";
 import { getDoc, doc } from "firebase/firestore";
 import { useSelector } from "react-redux";
+import { useState } from "react";
 
 const ChatRoom = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,7 @@ const ChatRoom = () => {
   const targetUser = useSelector((state) => state.targetUser);
   const navigate = useNavigate();
   const { targetUserId, targetUserName, targetUserAvatar } = targetUser;
+  const [searchValue, setSearchValue] = useState("");
   const userAvatar = targetUserAvatar ? targetUserAvatar : <PersonIcon />;
 
   const handleSelectUser = async (userId, userName) => {
@@ -59,10 +61,11 @@ const ChatRoom = () => {
             targetedUserAvatar={targetUserAvatar}
             userName={userData?.userName}
             avatar={userData?.avatar}
+            searchValue={searchValue}
           />
         </div>
         <div className="col-lg-3 col-md-3 col-sm-3 col-xs-3">
-          <RightSideBar />
+          <RightSideBar onSearchChange={setSearchValue} />
         </div>
       </div>
     </div>

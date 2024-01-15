@@ -28,7 +28,7 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 
-const ChatWindow = ({ currentUserId, targetUserId }) => {
+const ChatWindow = ({ currentUserId, targetUserId, searchValue }) => {
   const dispatch = useDispatch();
   const chat = useSelector((state) => state.chat);
   const userData = useSelector((state) => state.user.user);
@@ -98,8 +98,6 @@ const ChatWindow = ({ currentUserId, targetUserId }) => {
             };
           });
           dispatch(fetchMessagesSuccess({ messages: data, conversationId }));
-
-          // Scroll to bottom after messages are fetched and dispatched
         });
 
         return unsubscribe;
@@ -237,6 +235,7 @@ const ChatWindow = ({ currentUserId, targetUserId }) => {
               currentUserId={currentUserId}
               targetUserId={targetUserId}
               conversationId={chat.conversationId}
+              searchValue={searchValue}
             />
           ))
         )}

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { doc, setDoc } from "firebase/firestore";
@@ -8,17 +9,29 @@ import SearchIcon from "@mui/icons-material/Search";
 import { targetUserSuccess } from "../../redux/slice/targetUserSlice";
 import { ControlCameraSharp } from "@mui/icons-material";
 
-const RightSideBar = () => {
+const RightSideBar = ({ onSearchChange }) => {
   const dispatch = useDispatch();
   const targetUser = useSelector((state) => state.targetUser.targetUser);
   const userData = useSelector((state) => state.user.user);
   const [newNickname, setNewNickname] = useState("");
+  const [searchValue, setSearchValue] = useState("");
 
   let avatar, userName;
   if (targetUser) {
     avatar = targetUser.avatar;
     userName = targetUser.nickname ? targetUser.nickname : targetUser.userName;
   }
+
+  const handleSearchChange = (e) => {
+    const newSearchValue = e.target.value;
+    setSearchValue(newSearchValue);
+    onSearchChange(newSearchValue);
+
+    if (newSearchValue === "") {
+      setSearchValue("");
+      onSearchChange("");
+    }
+  };
 
   return (
     <div className="rightSideBar_container">
@@ -49,7 +62,12 @@ const RightSideBar = () => {
           </div>
           <div className="rightSideBar_contents--search">
             <SearchIcon sx={{ width: 50, height: 50 }} />
-            <div className="header">Search in conversation</div>
+            <input
+              type="text"
+              value={searchValue}
+              onChange={handleSearchChange} // Use the new handler function
+              placeholder="Search messages"
+            />
           </div>
         </div>
       </div>

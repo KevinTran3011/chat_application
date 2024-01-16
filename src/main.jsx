@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { store, persistor } from "./redux/index.js";
@@ -12,7 +12,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <App />
+        <I18nextProvider i18n={i18n}>
+          <Suspense fallback={<div>Loading...</div>}>
+            <App />
+          </Suspense>
+        </I18nextProvider>
       </PersistGate>
     </Provider>
   </React.StrictMode>

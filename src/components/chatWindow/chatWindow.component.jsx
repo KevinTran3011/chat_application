@@ -20,6 +20,7 @@ import SendIcon from "@mui/icons-material/Send";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import { useSelector, useDispatch } from "react-redux";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { useTranslation } from "react-i18next";
 import {
   getStorage,
   uploadBytesResumable,
@@ -39,6 +40,7 @@ const ChatWindow = ({ currentUserId, targetUserId, searchValue }) => {
   const storage = getStorage();
   const fileInputRef = useRef(null);
   const messagesEndRef = useRef(null);
+  const { t, i18n } = useTranslation();
 
   // ALWAYS SCROLLED TO THE BOTTOM
   useEffect(() => {
@@ -222,8 +224,8 @@ const ChatWindow = ({ currentUserId, targetUserId, searchValue }) => {
               <ChatIcon style={{ fontSize: "100px" }} />
             </div>
             <div className="chatWindow--empty_text">
-              Welcome {userData.userName}, Choose a contact to have a
-              conversation
+              {t("chatWindow.welcome")} {userData.userName},
+              {t("chatWindow.prompt")}
             </div>
           </div>
         ) : (

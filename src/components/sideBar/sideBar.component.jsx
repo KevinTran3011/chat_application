@@ -10,6 +10,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { targetUserLogout } from "../../redux/slice/targetUserSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 import "bootstrap/dist/css/bootstrap.css";
 
 const SideBar = ({ onSelectUser }) => {
@@ -17,6 +18,8 @@ const SideBar = ({ onSelectUser }) => {
   const userData = useSelector((state) => state.user.user);
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
+
   useEffect(() => {
     const fetchUsers = async () => {
       const usersCollection = await getDocs(collection(db, "users"));
@@ -68,14 +71,14 @@ const SideBar = ({ onSelectUser }) => {
       <div className="sideBar_body">
         <div className="sideBar_body_header">
           <div className="sideBar_body_title">
-            <div className="header">Chats</div>
+            <div className="header">{t("sideBar.header")}</div>
           </div>
 
           <div className="searchSection" style={{ marginBottom: "15px" }}>
             <InputComponent
               className="search_input"
               type="text"
-              placeholder="Search for contacts"
+              placeholder={t("sideBar.search")}
               onChange={searchUser}
             />
           </div>
@@ -99,7 +102,7 @@ const SideBar = ({ onSelectUser }) => {
           {" "}
           <div className="links_text--room">
             <SettingsIcon className="sideBar_settings--icon" />
-            <div className="settings_text">Settings</div>
+            <div className="settings_text">{t("sideBar.settings")}</div>
           </div>
         </Link>
         <div
@@ -109,7 +112,7 @@ const SideBar = ({ onSelectUser }) => {
           }}
         >
           <LogoutIcon className="signOut_icon" />
-          <div className="signOut_text">Sign Out</div>
+          <div className="signOut_text">{t("sideBar.logOut")}</div>
         </div>
       </div>
     </div>

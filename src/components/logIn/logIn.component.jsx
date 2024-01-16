@@ -20,6 +20,7 @@ import { useNavigate } from "react-router-dom";
 import "../../chat-application.scss/main.css";
 import { DevTool } from "@hookform/devtools";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const LogIn = () => {
   const {
@@ -31,6 +32,7 @@ const LogIn = () => {
   } = useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t, i18n } = useTranslation();
 
   const onSubmit = async (data) => {
     console.log("onSubmit called with data:", data);
@@ -72,23 +74,23 @@ const LogIn = () => {
           <PersonIcon className="logIn_avatar--icon" />
         </div>
         <label htmlFor="email" className="title--form">
-          Email
+          {t("logIn.emailLabel")}
         </label>
         <InputComponent
           type="email"
           className="inputField"
-          placeholder="Email"
+          placeholder={t("logIn.emailPlaceholder")}
           {...register("email", { required: "Email is required" })}
         />
         <label htmlFor="password" className="title--form">
-          Password
+          {t("logIn.passwordLabel")}{" "}
         </label>
 
         <InputComponent
           ref={register}
           type="password"
           className="inputField"
-          placeholder="Password"
+          placeholder={t("logIn.passwordPlaceholder")}
           {...register("password", { required: "Password is required" })}
         ></InputComponent>
 

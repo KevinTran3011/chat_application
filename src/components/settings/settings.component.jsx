@@ -27,6 +27,7 @@ import "react-toastify/dist/ReactToastify.css";
 import UpdateIcon from "@mui/icons-material/Update";
 import ClearIcon from "@mui/icons-material/Clear";
 import Swal from "sweetalert2";
+import { useTranslation } from "react-i18next";
 import "../../chat-application.scss/main.css";
 
 const Settings = () => {
@@ -36,6 +37,13 @@ const Settings = () => {
   const [isEditingUserName, setIsEditingUserName] = useState(false);
   const dispatch = useDispatch();
   const storage = getStorage();
+  const [languageIsOpen, setLanguageIsOpen] = useState(false);
+  const { t, i18n } = useTranslation();
+
+  const locales = {
+    en: { title: "English" },
+    vi: { title: "Vietnamese" },
+  };
 
   const showAvatarUpdateMessageSuccess = () => {
     toast.success("Successfully updated the avatar", {
@@ -139,7 +147,7 @@ const Settings = () => {
               <span>
                 <ArrowBackIosIcon></ArrowBackIosIcon>
               </span>{" "}
-              Return to chat room
+              {t("settings.chatRoomLinks")}
             </Link>
           </div>
           <div className="settings_information">
@@ -175,7 +183,7 @@ const Settings = () => {
 
             <div className="settings_information--name">
               <div className="header">
-                Full name :
+                {t("settings.nameLable")} :
                 {isEditingUserName ? (
                   <InputComponent
                     className="settings_information--name--input"
@@ -202,12 +210,32 @@ const Settings = () => {
         <div className="settings_body">
           <div className="settings_body--language">
             <div className="settings_body--header">
-              <div className="header">Change language</div>
+              <div className="header">{t("settings.language")}</div>
             </div>
             <LanguageIcon
               sx={{ width: 50, height: 50, marginBottom: "15px" }}
+              onClick={() => setLanguageIsOpen(!languageIsOpen)}
             />
-            <div className="header">Current language : </div>
+            {languageIsOpen
+              ? Object.keys(locales).map((locale) => (
+                  <li key={locale} className="language_selector">
+                    <button
+                      className="modified_button--language"
+                      style={{
+                        fontWeight:
+                          i18n.resolvedLanguage === locale ? "bold" : "normal",
+                        color:
+                          i18n.resolvedLanguage === locale ? "white" : "black",
+                      }}
+                      type="submit"
+                      onClick={() => i18n.changeLanguage(locale)}
+                    >
+                      {locales[locale].title}
+                    </button>
+                  </li>
+                ))
+              : null}
+            <div className="header">Current language :</div>
           </div>
           <div className="settings_body--theme">
             <div className="settings_body--header">

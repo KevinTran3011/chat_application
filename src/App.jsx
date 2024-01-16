@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useSelector } from "react-redux";
-
+import { Suspense } from "react";
 import LogIn from "./components/logIn/logIn.component";
 import SignUp from "./components/signUp/signUp.component";
 import ChatWindow from "./components/chatWindow/chatWindow.component";

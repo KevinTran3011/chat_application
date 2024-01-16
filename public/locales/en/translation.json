@@ -9,13 +9,32 @@
     "settings": "settings",
     "logOut": "Log out"
   },
-  "rightSidebar": {},
+  "rightSidebar": {
+    "settings": "Settings",
+    "Search message": "Search message"
+  },
   "logIn": {
     "emailLabel": "Email",
     "emailPlaceholder": "Enter your email",
     "passwordLabel": "Password",
-    "passwordPlaceholder": "Enter your password"
+    "passwordPlaceholder": "Enter your password",
+    "signUpLink": "Don't have an account ? Sign Up"
   },
-  "signUp": {},
-  "settings": {}
+  "signUp": {
+    "userNameLabel": "Username",
+    "userNamePlaceholder": "Enter your username",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Enter your email",
+    "passwordLabel": "Password",
+    "passwordPlaceholder": "Enter your password",
+    "signUpButton": "Sign up",
+    "logInLink": "Have an account ? Sign In"
+  },
+  "settings": {
+    "chatRoomLinks": "Return to chat room",
+    "languageHeader": "Language",
+    "language": "Change language",
+    "themeHeader": "Theme",
+    "nameLable": "Full name"
+  }
 }

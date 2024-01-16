@@ -21,6 +21,7 @@ import { DevTool } from "@hookform/devtools";
 import ButtonComponent from "../Button/button.component";
 import InputComponent from "../Input/input.component";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
@@ -29,6 +30,7 @@ const SignUp = () => {
   const navigate = useNavigate();
   const [avatar, setAvatar] = useState(null);
   const [avatarFile, setAvatarFile] = useState(null);
+  const { t, i18n } = useTranslation();
 
   useEffect(() => {
     if (avatarFile) {
@@ -123,40 +125,40 @@ const SignUp = () => {
         </div>
 
         <label htmlFor="username" className="title--form">
-          Username
+          {t("signUp.userNameLabel")}
         </label>
         <InputComponent
           type="text"
           className="inputField"
           {...register("username", { required: "Please enter username" })}
-          placeholder="Username"
+          placeholder={t("signUp.userNamePlaceholder")}
         />
         <label htmlFor="email" className="title--form">
-          Email
+          {t("signUp.emailLabel")}
         </label>
 
         <InputComponent
           type="email"
           className="inputField"
           {...register("email", { required: "Please enter email" })}
-          placeholder="Email"
+          placeholder={t("signUp.emailPlaceholder")}
         />
         <label htmlFor="password" className="title--form">
-          Password
+          {t("signUp.passwordLabel")}
         </label>
 
         <InputComponent
           type="password"
           className="inputField"
           {...register("password", { required: "Please enter password" })}
-          placeholder="Password"
+          placeholder={t("signUp.passwordPlaceholder")}
         />
 
         <ButtonComponent type="submit" className="signUp_button">
-          Sign Up
+          {t("signUp.signUpButton")}
         </ButtonComponent>
         <Link to="/">
-          <div className="links_text">Have an account? Sign In</div>
+          <div className="links_text"> {t("signUp.logInLink")}</div>
         </Link>
       </form>
       <DevTool control={control} />

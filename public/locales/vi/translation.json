@@ -1,0 +1,40 @@
+{
+  "chatWindow": {
+    "welcome": "Xin chào",
+    "prompt": "Hãy chọn một cuộc trò chuyện để bắt đầu"
+  },
+  "sideBar": {
+    "header": "Danh bạ",
+    "search": "Tìm người liên hệ",
+    "settings": "Cài đặt",
+    "logOut": "Đăng xuất"
+  },
+  "rightSidebar": {
+    "settings": "Cài đặt",
+    "Search message": "TÌm kiếm tin nhắn "
+  },
+  "logIn": {
+    "emailLabel": "Email",
+    "emailPlaceholder": "Nhập Email của bạn",
+    "passwordLabel": "Mật khẩu",
+    "passwordPlaceholder": "Nhập mật khẩu",
+    "signUpLink": "Chưa có tài khoản ? Đăng ký"
+  },
+  "signUp": {
+    "userNameLabel": "Tên người dùng",
+    "userNamePlaceholder": "Nhập tên người dùng của bạn",
+    "emailLabel": "Email",
+    "emailPlaceholder": "Nhập Email của bạn",
+    "passwordLabel": "Mật khẩu",
+    "passwordPlaceholder": "Nhập mật khẩu",
+    "signUpButton": "Đăng ký",
+    "logInLink": "Có tài khoản ? Đăng nhập"
+  },
+  "settings": {
+    "chatRoomLinks": "Quay về cuộc trò chuyện",
+    "languageHeader": "Ngôn ngữ",
+    "language": "Đổi ngôn ngữ",
+    "themeHeader": "Tông màu",
+    "nameLable": "Tên đầy đủ"
+  }
+}

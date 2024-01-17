@@ -13,24 +13,26 @@ import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import "bootstrap/dist/css/bootstrap.css";
 
-const SideBar = ({ onSelectUser }) => {
+const SideBar = ({ onSelectUser, onMessageSend, users, setUsers }) => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user.user);
-  const [users, setUsers] = useState([]);
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const theme = useSelector((state) => state.user.theme);
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const usersCollection = await getDocs(collection(db, "users"));
-      setUsers(
-        usersCollection.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-      );
+      // Only fetch users data if the users state is empty
+      if (users.length === 0) {
+        const usersCollection = await getDocs(collection(db, "users"));
+        setUsers(
+          usersCollection.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        );
+      }
     };
 
     fetchUsers();
-  }, []);
+  }, [onMessageSend, setUsers, users]); // Add users to the dependency array
 
   const signOutUser = async () => {
     try {

@@ -8,6 +8,14 @@
   margin-bottom: 10px;
   gap: 10px;
 
+  &.theme-default {
+    color: #fff;
+  }
+
+  &.theme-light {
+    color: black;
+  }
+
   &--sender {
     @extend .message_container;
     align-self: flex-end;

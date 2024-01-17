@@ -25,6 +25,7 @@ const ChatRoom = () => {
   const { targetUserId, targetUserName, targetUserAvatar } = targetUser;
   const [searchValue, setSearchValue] = useState("");
   const userAvatar = targetUserAvatar ? targetUserAvatar : <PersonIcon />;
+  const theme = useSelector((state) => state.user.theme);
 
   const handleSelectUser = async (userId, userName) => {
     dispatch(targetUserRequest({ userId, userName, userAvatar }));
@@ -41,7 +42,7 @@ const ChatRoom = () => {
   };
 
   return (
-    <div className="chatRoom_container">
+    <div className={`chatRoom_container theme-${theme}`}>
       <div
         className="chatRoom-body"
         style={{ display: "flex", flexDirection: "row" }}

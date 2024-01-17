@@ -10,6 +10,7 @@ import SweetAlert2 from "react-sweetalert2";
 const Message = ({ message, currentUserId, conversationId, searchValue }) => {
   const [senderData, setSenderData] = useState(null);
   const userData = useSelector((state) => state.user.user);
+  const theme = useSelector((state) => state.user.theme);
 
   const isHighlighted =
     searchValue &&
@@ -31,8 +32,6 @@ const Message = ({ message, currentUserId, conversationId, searchValue }) => {
 
     fetchSenderData();
   }, []);
-
-  const deleteMessagePopUP = () => {};
 
   const renderFile = () => {
     if (message.file) {
@@ -122,9 +121,12 @@ const Message = ({ message, currentUserId, conversationId, searchValue }) => {
               {renderFile()}
             </div>
           </div>
-          <div className="message_container--delete">
+          <div className={`message_container--delete theme-${theme}`}>
             {message.userId === currentUserId && (
-              <DeleteIcon onClick={deleteMessage} />
+              <DeleteIcon
+                style={{ color: theme === "light" ? "black" : "white" }}
+                onClick={deleteMessage}
+              />
             )}
           </div>
         </>

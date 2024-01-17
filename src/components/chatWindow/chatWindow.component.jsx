@@ -29,12 +29,7 @@ import {
   getDownloadURL,
 } from "firebase/storage";
 
-const ChatWindow = ({
-  currentUserId,
-  targetUserId,
-  searchValue,
-  onMessageSend,
-}) => {
+const ChatWindow = ({ currentUserId, targetUserId, searchValue }) => {
   const dispatch = useDispatch();
   const chat = useSelector((state) => state.chat);
   const userData = useSelector((state) => state.user.user);
@@ -162,7 +157,7 @@ const ChatWindow = ({
             targetUserId: targetUserId,
           }
         );
-        onMessageSend();
+
         setNewMessage("");
         setFileUrl(null);
         fileInputRef.current.value = "";

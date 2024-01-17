@@ -23,10 +23,7 @@ const ChatContacts = ({ id, userName, onSelectUser, avatar }) => {
         </div>
       </div>
       <div className="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-        <div
-          className="chatContacts_name"
-          onClick={() => onSelectUser(id, userName)}
-        >
+        <div className="chatContacts_name" onClick={() => onSelectUser(id)}>
           <div className="link_text">{userName}</div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useEffect, useState } from "react";
-import { getDocs, collection, getDoc } from "firebase/firestore";
+import { getDocs, collection } from "firebase/firestore";
 import { auth, db } from "../../firebase";
 import { Link, useNavigate } from "react-router-dom";
 import ChatContacts from "../chatContacts/chatContacts.component";
@@ -13,26 +13,24 @@ import { useSelector, useDispatch } from "react-redux";
 import { useTranslation } from "react-i18next";
 import "bootstrap/dist/css/bootstrap.css";
 
-const SideBar = ({ onSelectUser, onMessageSend, users, setUsers }) => {
+const SideBar = ({ onSelectUser }) => {
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.user.user);
+  const [users, setUsers] = useState([]);
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
   const theme = useSelector((state) => state.user.theme);
 
   useEffect(() => {
     const fetchUsers = async () => {
-      // Only fetch users data if the users state is empty
-      if (users.length === 0) {
-        const usersCollection = await getDocs(collection(db, "users"));
-        setUsers(
-          usersCollection.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-        );
-      }
+      const usersCollection = await getDocs(collection(db, "users"));
+      setUsers(
+        usersCollection.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+      );
     };
 
     fetchUsers();
-  }, [onMessageSend, setUsers, users]); // Add users to the dependency array
+  }, []);
 
   const signOutUser = async () => {
     try {

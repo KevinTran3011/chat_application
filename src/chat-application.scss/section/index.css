@@ -19,6 +19,14 @@ body {
   padding: 5px;
   overflow: hidden;
 }
+.sideBar_container.theme-default {
+  background-color: #252525;
+  color: #fff;
+}
+.sideBar_container.theme-light {
+  background-color: white;
+  color: black;
+}
 .sideBar_container .search_input {
   width: 100%;
   outline: none;
@@ -237,8 +245,6 @@ body {
 .settings_container {
   display: flex;
   align-items: center;
-  background-color: #252525;
-  color: #fff;
   position: absolute;
   top: 0;
   left: 0;
@@ -247,6 +253,14 @@ body {
   overflow: auto;
   padding: 15px;
   flex-direction: column;
+}
+.settings_container.theme-default {
+  background-color: #252525;
+  color: #fff;
+}
+.settings_container.theme-light {
+  background-color: white;
+  color: black;
 }
 .settings_container .links_container {
   margin-bottom: 15px;

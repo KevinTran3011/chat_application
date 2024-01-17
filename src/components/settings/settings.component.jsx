@@ -28,16 +28,19 @@ import UpdateIcon from "@mui/icons-material/Update";
 import ClearIcon from "@mui/icons-material/Clear";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
+import { changeTheme } from "../../redux/slice/userSlice";
 import "../../chat-application.scss/main.css";
 
 const Settings = () => {
   const targetUserId = useSelector((state) => state.targetUser.targetUserId);
   const userData = useSelector((state) => state.user.user);
+  const userDocRef = doc(db, "users", userData?.uid);
   const [newUserName, setNewUserName] = useState("");
   const [isEditingUserName, setIsEditingUserName] = useState(false);
   const dispatch = useDispatch();
   const storage = getStorage();
   const [languageIsOpen, setLanguageIsOpen] = useState(false);
+  const theme = useSelector((state) => state.user.theme);
   const { t, i18n } = useTranslation();
 
   const locales = {
@@ -54,6 +57,18 @@ const Settings = () => {
   };
 
   const fileInputRef = useRef(null);
+
+  const handleThemeChange = async (newTheme) => {
+    dispatch(changeTheme(newTheme));
+
+    try {
+      await setDoc(userDocRef, { theme: newTheme }, { merge: true });
+      console.log("successfully changed the theme to", newTheme);
+      console.log("userData.theme is", userData);
+    } catch (err) {
+      console.log("error while changing the theme", err.message);
+    }
+  };
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -132,7 +147,8 @@ const Settings = () => {
   };
 
   return (
-    <div className="settings_container">
+    <div className={`settings_container theme-${theme}`}>
+      {" "}
       <div className="settings_form">
         <div className="settings_header">
           <div className="links_container">
@@ -245,6 +261,12 @@ const Settings = () => {
                   <EditIcon />
                 </span>
               </div>
+              <button onClick={() => handleThemeChange("default")}>
+                Default Theme
+              </button>
+              <button onClick={() => handleThemeChange("light")}>
+                Light Theme
+              </button>
             </div>
           </div>
         </div>

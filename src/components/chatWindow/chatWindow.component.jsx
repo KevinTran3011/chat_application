@@ -41,6 +41,7 @@ const ChatWindow = ({ currentUserId, targetUserId, searchValue }) => {
   const fileInputRef = useRef(null);
   const messagesEndRef = useRef(null);
   const { t, i18n } = useTranslation();
+  const theme = useSelector((state) => state.user.theme);
 
   // ALWAYS SCROLLED TO THE BOTTOM
   useEffect(() => {
@@ -198,7 +199,7 @@ const ChatWindow = ({ currentUserId, targetUserId, searchValue }) => {
   };
 
   return (
-    <div className="chatWindow_container">
+    <div className={`chatWindow_container theme-${theme}`}>
       <div className="chatWindow_header">
         <div className="chatWindow--title">
           {" "}

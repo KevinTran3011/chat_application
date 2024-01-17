@@ -80,6 +80,14 @@
   border: 3px solid #5ce1e6;
   padding: 5px;
 }
+.chatWindow_container.theme-default {
+  background-color: #252525;
+  color: #fff;
+}
+.chatWindow_container.theme-light {
+  background-color: white;
+  color: black;
+}
 
 .chatWindow_header {
   position: sticky;

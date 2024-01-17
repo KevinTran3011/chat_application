@@ -7,6 +7,16 @@
   height: 100vh;
   border: 3px solid $box_outline;
   padding: 5px;
+
+  &.theme-default {
+    background-color: #252525;
+    color: #fff;
+  }
+
+  &.theme-light {
+    background-color: white;
+    color: black;
+  }
 }
 
 .chatWindow_header {

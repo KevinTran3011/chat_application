@@ -4,6 +4,7 @@ const initialState = {
   user: null,
   status: "idle",
   error: null,
+  theme: "default",
 };
 
 const userSlice = createSlice({
@@ -40,6 +41,9 @@ const userSlice = createSlice({
     deleteUserAvatar: (state) => {
       state.user.avatar = null;
     },
+    changeTheme: (state, action) => {
+      state.theme = action.payload;
+    },
   },
 });
 
@@ -51,5 +55,6 @@ export const {
   updateUserAvatar,
   deleteUserAvatar,
   updateUserName,
+  changeTheme, // export the new action
 } = userSlice.actions;
 export default userSlice.reducer;

@@ -17,6 +17,7 @@ import {
 import PersonIcon from "@mui/icons-material/Person";
 import { auth, db } from "../../firebase";
 import { useNavigate } from "react-router-dom";
+import { changeTheme } from "../../redux/slice/userSlice";
 import "../../chat-application.scss/main.css";
 import { DevTool } from "@hookform/devtools";
 import { Link } from "react-router-dom";
@@ -32,6 +33,7 @@ const LogIn = () => {
   } = useForm();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const { t, i18n } = useTranslation();
 
   const onSubmit = async (data) => {
@@ -52,6 +54,8 @@ const LogIn = () => {
       if (userDoc.exists()) {
         const userData = userDoc.data();
         userData.uid = userCredential.user.uid;
+        const theme = userData.theme;
+        dispatch(changeTheme(theme));
         dispatch(signinSuccess(userData));
         dispatch(userSuccess(userData));
         navigate(`/${userData.uid}/chats/`);

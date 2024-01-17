@@ -3,8 +3,6 @@
 
 .settings_container {
   @include flex_center;
-  background-color: #252525;
-  color: #fff;
   position: absolute;
   top: 0;
   left: 0;
@@ -13,6 +11,16 @@
   overflow: auto;
   padding: 15px;
   flex-direction: column;
+
+  &.theme-default {
+    background-color: #252525;
+    color: #fff;
+  }
+
+  &.theme-light {
+    background-color: white;
+    color: black;
+  }
 
   .links_container {
     margin-bottom: 15px;

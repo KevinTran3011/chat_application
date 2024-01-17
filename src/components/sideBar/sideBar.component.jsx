@@ -19,6 +19,7 @@ const SideBar = ({ onSelectUser }) => {
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
   const { t, i18n } = useTranslation();
+  const theme = useSelector((state) => state.user.theme);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -52,7 +53,7 @@ const SideBar = ({ onSelectUser }) => {
   };
 
   return (
-    <div className="sideBar_container">
+    <div className={`sideBar_container theme-${theme}`}>
       <div className="sideBar_title">
         <div className="sideBar_header">
           <div className="signedInUser_name">{userData.userName}</div>

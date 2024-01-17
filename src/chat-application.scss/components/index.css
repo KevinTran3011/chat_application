@@ -154,6 +154,14 @@
   display: flex;
   align-items: center;
 }
+.chatWindow--title.theme-default {
+  background-color: #252525;
+  color: #fff;
+}
+.chatWindow--title.theme-light {
+  background-color: white;
+  color: black;
+}
 
 .addIcon,
 .sendIcon {

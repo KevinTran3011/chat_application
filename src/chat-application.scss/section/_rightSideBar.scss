@@ -9,6 +9,16 @@
   height: 100vh;
   padding: 5px;
   overflow: hidden;
+
+  &.theme-default {
+    background-color: #252525;
+    color: #fff;
+  }
+
+  &.theme-light {
+    background-color: white;
+    color: black;
+  }
 }
 .rightSideBar_body {
   padding: 5%;

@@ -201,7 +201,7 @@ const ChatWindow = ({ currentUserId, targetUserId, searchValue }) => {
   return (
     <div className={`chatWindow_container theme-${theme}`}>
       <div className="chatWindow_header">
-        <div className="chatWindow--title">
+        <div className={`chatWindow--title theme-${theme}`}>
           {" "}
           <div className="chatWindow--title_avatar">
             {avatar ? (

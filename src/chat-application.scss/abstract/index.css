@@ -22,6 +22,12 @@ body {
 .links_text--room {
   color: #fff;
 }
+.links_text--room.theme-default {
+  color: #fff;
+}
+.links_text--room.theme-light {
+  color: black;
+}
 
 .header {
   font-size: 20px;

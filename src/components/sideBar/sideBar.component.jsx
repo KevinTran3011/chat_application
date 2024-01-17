@@ -54,8 +54,8 @@ const SideBar = ({ onSelectUser }) => {
 
   return (
     <div className={`sideBar_container theme-${theme}`}>
-      <div className="sideBar_title">
-        <div className="sideBar_header">
+      <div className={`sideBar_title theme-${theme}`}>
+        <div className={`sideBar_header theme-${theme}`}>
           <div className="signedInUser_name">{userData.userName}</div>
           <div className="signedInUser_avatar">
             {userData.avatar ? (
@@ -69,13 +69,16 @@ const SideBar = ({ onSelectUser }) => {
           </div>
         </div>
       </div>
-      <div className="sideBar_body">
-        <div className="sideBar_body_header">
-          <div className="sideBar_body_title">
+      <div className={`sideBar_body theme-${theme}`}>
+        <div className={`sideBar_body_header theme-${theme}`}>
+          <div className={`sideBar_body_title theme-${theme}`}>
             <div className="header">{t("sideBar.header")}</div>
           </div>
 
-          <div className="searchSection" style={{ marginBottom: "15px" }}>
+          <div
+            className={`sideBar_searchSection theme-${theme}`}
+            style={{ marginBottom: "15px" }}
+          >
             <InputComponent
               className="search_input"
               type="text"
@@ -98,11 +101,11 @@ const SideBar = ({ onSelectUser }) => {
             ))}
         </ul>
       </div>
-      <div className="sideBar_footer">
+      <div className={`sideBar_footer theme-${theme}`}>
         <Link to={`/${userData?.uid}/settings`}>
           {" "}
-          <div className="links_text--room">
-            <SettingsIcon className="sideBar_settings--icon" />
+          <div className={`links_text--room theme-${theme}`}>
+            <SettingsIcon className={`sideBar_settings theme-${theme}`} />
             <div className="settings_text">{t("sideBar.settings")}</div>
           </div>
         </Link>

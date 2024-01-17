@@ -33,6 +33,14 @@ body {
   &--room {
     @extend .links_text;
     color: $main_color;
+
+    &.theme-default {
+      color: #fff;
+    }
+
+    &.theme-light {
+      color: black;
+    }
   }
 }
 

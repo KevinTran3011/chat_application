@@ -82,6 +82,16 @@
   &_text {
     @include flex_center;
   }
+
+  &.theme-default {
+    background-color: #252525;
+    color: #fff;
+  }
+
+  &.theme-light {
+    background-color: white;
+    color: black;
+  }
 }
 
 .addIcon,

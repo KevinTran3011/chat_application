@@ -32,6 +32,15 @@
   gap: 50px;
   margin-bottom: 10px;
   justify-content: space-between;
+  &.theme-default {
+    background-color: #252525;
+    color: #fff;
+  }
+
+  &.theme-light {
+    background-color: white;
+    color: black;
+  }
 }
 
 .sideBar_title {
@@ -53,14 +62,33 @@
   justify-content: space-between;
   position: sticky;
   height: 10%;
-  background-color: $background_color;
   bottom: 0;
   padding: 5px;
   gap: 50px;
+
+  &.theme-default {
+    background-color: #252525;
+    color: #fff;
+  }
+
+  &.theme-light {
+    background-color: white;
+    color: black;
+  }
   &--settings {
     .sideBar_settings--icon {
       width: 24px;
       height: 24px;
+
+      &.theme-default {
+        background-color: #252525;
+        color: #fff;
+      }
+
+      &.theme-light {
+        background-color: white;
+        color: black;
+      }
     }
   }
   &--language {
@@ -73,11 +101,30 @@
 
 .sideBar_body_title {
   margin-bottom: 10px;
+  &.theme-default {
+    background-color: #252525;
+    color: #fff;
+  }
+
+  &.theme-light {
+    background-color: white;
+    color: black;
+  }
 }
 .sideBar_body {
   padding: 0px 5px 5px 5px;
   height: 80%;
   overflow-y: auto;
+
+  &.theme-default {
+    background-color: #252525;
+    color: #fff;
+  }
+
+  &.theme-light {
+    background-color: white;
+    color: black;
+  }
 
   ul {
     padding-left: 0rem;
@@ -88,11 +135,30 @@
     top: 0;
     z-index: 10;
     background-color: $background_color;
+
+    &.theme-default {
+      background-color: #252525;
+      color: #fff;
+    }
+
+    &.theme-light {
+      background-color: white;
+      color: black;
+    }
   }
 }
 
 .searchSection {
   margin-bottom: 15px;
+  &.theme-default {
+    background-color: #252525;
+    color: #fff;
+  }
+
+  &.theme-light {
+    background-color: white;
+    color: black;
+  }
 }
 .signOut_button {
   position: relative;

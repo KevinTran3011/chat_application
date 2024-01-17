@@ -40,6 +40,14 @@ body {
   margin-bottom: 10px;
   justify-content: space-between;
 }
+.sideBar_header.theme-default {
+  background-color: #252525;
+  color: #fff;
+}
+.sideBar_header.theme-light {
+  background-color: white;
+  color: black;
+}
 
 .sideBar_title {
   margin-bottom: 15px;
@@ -60,14 +68,29 @@ body {
   justify-content: space-between;
   position: sticky;
   height: 10%;
-  background-color: #252525;
   bottom: 0;
   padding: 5px;
   gap: 50px;
 }
+.sideBar_footer.theme-default {
+  background-color: #252525;
+  color: #fff;
+}
+.sideBar_footer.theme-light {
+  background-color: white;
+  color: black;
+}
 .sideBar_footer--settings .sideBar_settings--icon {
   width: 24px;
   height: 24px;
+}
+.sideBar_footer--settings .sideBar_settings--icon.theme-default {
+  background-color: #252525;
+  color: #fff;
+}
+.sideBar_footer--settings .sideBar_settings--icon.theme-light {
+  background-color: white;
+  color: black;
 }
 .sideBar_footer--language .sideBar_language--icon {
   width: 24px;
@@ -77,11 +100,27 @@ body {
 .sideBar_body_title {
   margin-bottom: 10px;
 }
+.sideBar_body_title.theme-default {
+  background-color: #252525;
+  color: #fff;
+}
+.sideBar_body_title.theme-light {
+  background-color: white;
+  color: black;
+}
 
 .sideBar_body {
   padding: 0px 5px 5px 5px;
   height: 80%;
   overflow-y: auto;
+}
+.sideBar_body.theme-default {
+  background-color: #252525;
+  color: #fff;
+}
+.sideBar_body.theme-light {
+  background-color: white;
+  color: black;
 }
 .sideBar_body ul {
   padding-left: 0rem;
@@ -92,9 +131,25 @@ body {
   z-index: 10;
   background-color: #252525;
 }
+.sideBar_body_header.theme-default {
+  background-color: #252525;
+  color: #fff;
+}
+.sideBar_body_header.theme-light {
+  background-color: white;
+  color: black;
+}
 
 .searchSection {
   margin-bottom: 15px;
+}
+.searchSection.theme-default {
+  background-color: #252525;
+  color: #fff;
+}
+.searchSection.theme-light {
+  background-color: white;
+  color: black;
 }
 
 .signOut_button {
@@ -218,6 +273,14 @@ body {
   height: 100vh;
   padding: 5px;
   overflow: hidden;
+}
+.rightSideBar_container.theme-default {
+  background-color: #252525;
+  color: #fff;
+}
+.rightSideBar_container.theme-light {
+  background-color: white;
+  color: black;
 }
 
 .rightSideBar_body {

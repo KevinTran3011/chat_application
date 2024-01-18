@@ -48,7 +48,7 @@ const LogIn = () => {
   const navigate = useNavigate();
   const [passwordError, setPasswordError] = useState(null);
   const [emailError, setEmailError] = useState(null);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
 
   const onSubmit = async (data) => {
     console.log("onSubmit called with data:", data);
@@ -99,7 +99,7 @@ const LogIn = () => {
           {t("logIn.emailLabel")}
         </label>
         <InputComponent
-          type="email"
+          type="text"
           className="inputField"
           placeholder={t("logIn.emailPlaceholder")}
           {...register("email", { required: "Email is required" })}

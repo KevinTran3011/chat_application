@@ -24,15 +24,24 @@ import InputComponent from "../Input/input.component";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.css";
 
 const SignUp = () => {
-  const schema = yup.object({
+  const schema = yup.object().shape({
     username: yup.string().required("Username is required"),
     email: yup
       .string()
       .email("Email format is not valid")
       .required("Email is required"),
     password: yup.string().required("Password is required"),
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref("password"), null], "Passwords must match")
+      .required("Confirm Password is required"),
+    dateOfBirth: yup
+      .date()
+      .max(new Date(), "Date of Birth must not exceed current date")
+      .required("Date of Birth is required"),
   });
   const {
     register,
@@ -48,6 +57,8 @@ const SignUp = () => {
   const [avatar, setAvatar] = useState(null);
   const [avatarFile, setAvatarFile] = useState(null);
   const [emailError, setEmailError] = useState(null);
+  const [confirmPasswordError, setConfirmPasswordError] = useState(null);
+  const [dateOfBirthError, setDateOfBirthError] = useState(null);
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -68,6 +79,7 @@ const SignUp = () => {
     try {
       dispatch(signupRequest());
       console.log("sending sign up request");
+
       const userCredential = await createUserWithEmailAndPassword(
         auth,
         data.email,
@@ -105,6 +117,7 @@ const SignUp = () => {
               password: data.password,
               avatar: avatarUrl,
               theme: "default",
+              dateOfBirth: data.dateOfBirth,
             });
           }
         );
@@ -115,6 +128,7 @@ const SignUp = () => {
           password: data.password,
           avatar: avatarUrl,
           theme: "default",
+          dateOfBirth: data.dateOfBirth,
         });
       }
 
@@ -152,41 +166,89 @@ const SignUp = () => {
           />
         </div>
 
-        <label htmlFor="username" className="title--form">
-          {t("signUp.userNameLabel")}
-        </label>
-        <InputComponent
-          type="text"
-          className="inputField"
-          {...register("username", { required: "Please enter username" })}
-          placeholder={t("signUp.userNamePlaceholder")}
-        />
-        <span className="error_text">{errors.username?.message}</span>
+        <div className="form_row">
+          <div className="field_pair">
+            <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+              <label htmlFor="username" className="title--form">
+                {t("signUp.userNameLabel")}
+              </label>
+              <InputComponent
+                type="text"
+                className="inputField"
+                {...register("username", { required: "Please enter username" })}
+                placeholder={t("signUp.userNamePlaceholder")}
+              />
+              <span className="error_text">{errors.username?.message}</span>
+            </div>
+            <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+              <label htmlFor="email" className="title--form">
+                {t("signUp.emailLabel")}
+              </label>
+              <InputComponent
+                type="text"
+                className="inputField"
+                {...register("email", { required: "Please enter email" })}
+                placeholder={t("signUp.emailPlaceholder")}
+              />
+              <span className="error_text">
+                {errors.email?.message || emailError}
+              </span>
+            </div>
+          </div>
 
-        <label htmlFor="email" className="title--form">
-          {t("signUp.emailLabel")}
-        </label>
+          <div className="field_pair">
+            <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+              <label htmlFor="password" className="title--form">
+                {t("signUp.passwordLabel")}
+              </label>
+              <InputComponent
+                type="password"
+                className="inputField"
+                {...register("password", { required: "Please enter password" })}
+                placeholder={t("signUp.passwordPlaceholder")}
+              />
+              <span className="error_text">
+                {errors.password?.message || confirmPasswordError}
+              </span>
+            </div>
 
-        <InputComponent
-          type="email"
-          className="inputField"
-          {...register("email", { required: "Please enter email" })}
-          placeholder={t("signUp.emailPlaceholder")}
-        />
-        <span className="error_text">
-          {errors.email?.message || emailError}
-        </span>
-        <label htmlFor="password" className="title--form">
-          {t("signUp.passwordLabel")}
-        </label>
+            <div className="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+              <label htmlFor="confirmPassword" className="title--form">
+                Confirm Password
+              </label>
+              <InputComponent
+                type="password"
+                className="inputField"
+                placeholder="Confirm Password"
+                {...register("confirmPassword", {
+                  required: "Confirm Password is required",
+                })}
+              ></InputComponent>
+              <span className="error_text">
+                {errors.confirmPassword?.message || confirmPasswordError}
+              </span>
+            </div>
+          </div>
 
-        <InputComponent
-          type="password"
-          className="inputField"
-          {...register("password", { required: "Please enter password" })}
-          placeholder={t("signUp.passwordPlaceholder")}
-        />
-        <span className="error_text">{errors.password?.message}</span>
+          <div className="field_pair">
+            <div className="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+              <label htmlFor="dateOfBirth" className="title--form">
+                Date of Birth
+              </label>
+              <InputComponent
+                type="date"
+                className="inputField"
+                placeholder="dateOfBirth"
+                {...register("dateOfBirth", {
+                  required: "Date of Birth",
+                })}
+              ></InputComponent>
+              <span className="error_text">
+                {errors.dateOfBirth?.message || dateOfBirthError}
+              </span>
+            </div>
+          </div>
+        </div>
 
         <ButtonComponent type="submit" className="signUp_button">
           {t("signUp.signUpButton")}

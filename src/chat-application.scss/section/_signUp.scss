@@ -35,6 +35,24 @@
       }
     }
 
+    .form_row {
+      margin-top: 25px;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      width: 100%;
+    }
+
+    .field_pair {
+      display: flex;
+      justify-content: space-between;
+      gap: 25px;
+    }
+
+    .field_pair > div {
+      flex: 1;
+    }
+
     .inputField {
       width: 100%;
       padding: 10px;

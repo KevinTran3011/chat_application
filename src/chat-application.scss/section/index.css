@@ -252,6 +252,21 @@ body {
   width: 100%;
   height: 100%;
 }
+.signUp_container .signUp_form .form_row {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: 100%;
+}
+.signUp_container .signUp_form .field_pair {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+}
+.signUp_container .signUp_form .field_pair > div {
+  flex: 1;
+}
 .signUp_container .signUp_form .inputField {
   width: 100%;
   padding: 10px;

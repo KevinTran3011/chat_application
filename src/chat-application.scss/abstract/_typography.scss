@@ -23,6 +23,7 @@ body {
   &--form {
     @extend .title;
     align-self: flex-start;
+    font-size: 16px;
   }
 }
 

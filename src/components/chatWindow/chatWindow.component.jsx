@@ -35,6 +35,7 @@ const ChatWindow = ({ currentUserId, targetUserId, searchValue }) => {
   const userData = useSelector((state) => state.user.user);
   const targetUser = useSelector((state) => state.targetUser.targetUser);
   const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
+  const [fileName, setFileName] = useState("");
   const [fileUrl, setFileUrl] = useState(null);
   const ref = useRef(null);
   const storage = getStorage();
@@ -121,14 +122,47 @@ const ChatWindow = ({ currentUserId, targetUserId, searchValue }) => {
 
       const conversationId = getConversationId(currentUserId, targetUserId);
 
-      if (fileInputRef.current.files.length > 0 && !fileUploaded) {
-        await handleFileChange(fileInputRef.current.files[0]);
+      let file = null;
+      if (fileInputRef.current.files.length > 0) {
+        file = fileInputRef.current.files[0];
       }
 
-      if (newMessage || fileInputRef.current.files.length > 0) {
+      let fileUrl = null;
+      if (file) {
+        const storageRef = createStorageRef(storage, "chatFiles/" + file.name);
+        const uploadTask = uploadBytesResumable(storageRef, file);
+
+        if (file.type.startsWith("image")) {
+          setImagePreviewUrl(URL.createObjectURL(file));
+        }
+
+        await new Promise((resolve, reject) => {
+          uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+              const progress =
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              console.log("Upload is " + progress + "% done");
+            },
+            (error) => {
+              console.error("Error uploading file:", error);
+              reject(error);
+            },
+            () => {
+              getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                console.log("File available at", downloadURL);
+                fileUrl = downloadURL;
+                resolve();
+              });
+            }
+          );
+        });
+      }
+
+      if (newMessage || file) {
         let messageContent = {};
-        if (fileInputRef.current.files.length > 0) {
-          const fileType = fileInputRef.current.files[0].type;
+        if (file) {
+          const fileType = file.type;
           if (fileType.startsWith("image")) {
             messageContent = {
               file: fileUrl,
@@ -162,40 +196,19 @@ const ChatWindow = ({ currentUserId, targetUserId, searchValue }) => {
         setFileUrl(null);
         fileInputRef.current.value = "";
         setImagePreviewUrl(null);
+        setFileName("");
       }
     } catch (error) {
       console.error("Error sending message:", error);
     }
   };
-  const handleFileChange = async (file) => {
-    const storageRef = createStorageRef(storage, "chatFiles/" + file.name);
-    const uploadTask = uploadBytesResumable(storageRef, file);
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setFileName(file.name);
 
     if (file.type.startsWith("image")) {
       setImagePreviewUrl(URL.createObjectURL(file));
     }
-
-    return new Promise((resolve, reject) => {
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
-        },
-        (error) => {
-          console.error("Error uploading file:", error);
-          reject(error);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            console.log("File available at", downloadURL);
-            setFileUrl(downloadURL);
-            setFileUploaded(true);
-          });
-        }
-      );
-    });
   };
 
   return (
@@ -254,9 +267,8 @@ const ChatWindow = ({ currentUserId, targetUserId, searchValue }) => {
             <ControlPointIcon onClick={() => fileInputRef.current.click()} />{" "}
             <input
               type="file"
-              className="settings_information--avatar--input"
               ref={fileInputRef}
-              onChange={(e) => handleFileChange(e.target.files[0])}
+              onChange={handleFileChange}
               style={{ display: "none" }}
             />
           </div>
@@ -266,7 +278,7 @@ const ChatWindow = ({ currentUserId, targetUserId, searchValue }) => {
             type="text"
             name="newMessage"
             className="inputField"
-            value={newMessage}
+            value={newMessage || fileName}
             onChange={(e) => setNewMessage(e.target.value)}
             placeholder="Type your message here..."
           />

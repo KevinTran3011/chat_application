@@ -60,34 +60,43 @@ const SignUp = () => {
       const usersCollection = collection(db, "users");
       const userDoc = doc(usersCollection, userId);
 
-      // Upload avatar to Firebase Storage
-      const storage = getStorage();
-      const avatarRef = ref(storage, `avatars/${userId}`);
-      const uploadTask = uploadBytesResumable(avatarRef, avatarFile);
+      let avatarUrl = null;
+      if (avatarFile) {
+        // Upload avatar to Firebase Storage
+        const storage = getStorage();
+        const avatarRef = ref(storage, `avatars/${userId}`);
+        const uploadTask = uploadBytesResumable(avatarRef, avatarFile);
 
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
-        },
-        (error) => {
-          console.error("Error uploading avatar:", error);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            console.log("File available at", downloadURL);
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const progress =
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+            console.log("Upload is " + progress + "% done");
+          },
+          (error) => {
+            console.error("Error uploading avatar:", error);
+          },
+          async () => {
+            avatarUrl = await getDownloadURL(uploadTask.snapshot.ref);
+            console.log("File available at", avatarUrl);
 
-            setDoc(userDoc, {
+            await setDoc(userDoc, {
               email: userCredential.user.email,
               userName: data.username,
               password: data.password,
-              avatar: downloadURL,
+              avatar: avatarUrl,
             });
-          });
-        }
-      );
+          }
+        );
+      } else {
+        await setDoc(userDoc, {
+          email: userCredential.user.email,
+          userName: data.username,
+          password: data.password,
+          avatar: avatarUrl,
+        });
+      }
 
       dispatch(signupSuccess());
       reset();
@@ -118,7 +127,7 @@ const SignUp = () => {
             type="file"
             className="inputField"
             style={{ display: "none" }}
-            {...register("avatar", { required: "Please upload an avatar" })}
+            {...register("avatar")}
             placeholder="Avatar"
             onChange={handleAvatarChange}
           />

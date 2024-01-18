@@ -45,10 +45,6 @@ const RightSideBar = ({ onSearchChange }) => {
         <div className="header">{userName}</div>
 
         <div className="rightSideBar_contents">
-          <div className="rightSideBar_contents--settings">
-            <SettingsIcon sx={{ width: 50, height: 50 }} />
-            <div className="header">Settings</div>
-          </div>
           <div className="rightSideBar_contents--search">
             <SearchIcon sx={{ width: 50, height: 50 }} />
             <input

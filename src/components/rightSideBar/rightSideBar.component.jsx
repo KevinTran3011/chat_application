@@ -1,13 +1,11 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import SettingsIcon from "@mui/icons-material/Settings";
 import SearchIcon from "@mui/icons-material/Search";
 
 const RightSideBar = ({ onSearchChange }) => {
-  const dispatch = useDispatch();
   const targetUser = useSelector((state) => state.targetUser.targetUser);
   const theme = useSelector((state) => state.user.theme);
   const [searchValue, setSearchValue] = useState("");

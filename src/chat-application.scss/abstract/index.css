@@ -40,4 +40,10 @@ body {
 }
 .input_Form--header {
   font-size: 50px;
+}
+
+.error_text {
+  font-size: 14px;
+  color: red;
+  font-weight: 600;
 }/*# sourceMappingURL=index.css.map */

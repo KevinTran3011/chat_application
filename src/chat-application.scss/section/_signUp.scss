@@ -13,7 +13,7 @@
   padding: 15px;
 
   .signUp_form {
-    gap: 15px;
+    gap: 8px;
     @include flex_center;
     flex-direction: column;
     border: 3px solid $box_outline;

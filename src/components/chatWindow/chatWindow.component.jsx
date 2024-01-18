@@ -25,7 +25,6 @@ import {
   getStorage,
   uploadBytesResumable,
   ref as createStorageRef,
-  deleteObject,
   getDownloadURL,
 } from "firebase/storage";
 
@@ -41,7 +40,7 @@ const ChatWindow = ({ currentUserId, targetUserId, searchValue }) => {
   const storage = getStorage();
   const fileInputRef = useRef(null);
   const messagesEndRef = useRef(null);
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const theme = useSelector((state) => state.user.theme);
 
   // ALWAYS SCROLLED TO THE BOTTOM

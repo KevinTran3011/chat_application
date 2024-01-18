@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import InputComponent from "../Input/input.component";
 import ButtonComponent from "../Button/button.component";
 import { signInWithEmailAndPassword } from "@firebase/auth";
@@ -18,22 +19,35 @@ import PersonIcon from "@mui/icons-material/Person";
 import { auth, db } from "../../firebase";
 import { useNavigate } from "react-router-dom";
 import { changeTheme } from "../../redux/slice/userSlice";
+import * as yup from "yup";
+import { yupResolver } from "@hookform/resolvers/yup";
 import "../../chat-application.scss/main.css";
 import { DevTool } from "@hookform/devtools";
 import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 const LogIn = () => {
+  const schema = yup.object({
+    email: yup
+      .string()
+      .email("Email format is not valid")
+      .required("Email is required"),
+    password: yup.string().required("Password is required"),
+  });
+
   const {
     register,
     handleSubmit,
-    formState: { error },
+    formState: { errors },
     reset,
     control,
-  } = useForm();
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const [passwordError, setPasswordError] = useState(null);
+  const [emailError, setEmailError] = useState(null);
   const { t, i18n } = useTranslation();
 
   const onSubmit = async (data) => {
@@ -66,7 +80,11 @@ const LogIn = () => {
       console.log("User logged in successfully");
       reset();
     } catch (err) {
-      console.log(`Error while logging in user: ${err.message}`);
+      console.log(`Error while logging in user: ${err.code}`);
+      if (err.code === "auth/invalid-credential") {
+        setPasswordError("Invalid email or password");
+        setEmailError("Invalid email or password");
+      }
       dispatch(signinFailure(err.message));
       dispatch(userFailure(err.message));
     }
@@ -86,10 +104,12 @@ const LogIn = () => {
           placeholder={t("logIn.emailPlaceholder")}
           {...register("email", { required: "Email is required" })}
         />
+        <span className="error_text">
+          {errors.email?.message || emailError}
+        </span>{" "}
         <label htmlFor="password" className="title--form">
           {t("logIn.passwordLabel")}{" "}
         </label>
-
         <InputComponent
           ref={register}
           type="password"
@@ -97,7 +117,9 @@ const LogIn = () => {
           placeholder={t("logIn.passwordPlaceholder")}
           {...register("password", { required: "Password is required" })}
         ></InputComponent>
-
+        <span className="error_text">
+          {errors.password?.message || passwordError}
+        </span>
         <ButtonComponent className="logIn_button" type="submit">
           <div className="title--form">Log In</div>
         </ButtonComponent>

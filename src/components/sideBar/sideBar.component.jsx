@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { getDocs, collection } from "firebase/firestore";
 import { auth, db } from "../../firebase";
 import { Link, useNavigate } from "react-router-dom";
@@ -18,7 +18,7 @@ const SideBar = ({ onSelectUser }) => {
   const userData = useSelector((state) => state.user.user);
   const [users, setUsers] = useState([]);
   const navigate = useNavigate();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const theme = useSelector((state) => state.user.theme);
 
   useEffect(() => {

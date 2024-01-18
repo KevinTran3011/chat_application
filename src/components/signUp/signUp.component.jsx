@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   signupRequest,
   signupFailure,
@@ -17,7 +17,8 @@ import {
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, db } from "../../firebase";
 import { DevTool } from "@hookform/devtools";
-// import InputComponent from "../Input/input.component";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
 import ButtonComponent from "../Button/button.component";
 import InputComponent from "../Input/input.component";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
@@ -25,12 +26,29 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
-  const { register, handleSubmit, reset, control } = useForm();
+  const schema = yup.object({
+    username: yup.string().required("Username is required"),
+    email: yup
+      .string()
+      .email("Email format is not valid")
+      .required("Email is required"),
+    password: yup.string().required("Password is required"),
+  });
+  const {
+    register,
+    handleSubmit,
+    reset,
+    control,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(schema),
+  });
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [avatar, setAvatar] = useState(null);
   const [avatarFile, setAvatarFile] = useState(null);
-  const { t, i18n } = useTranslation();
+  const [emailError, setEmailError] = useState(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (avatarFile) {
@@ -86,6 +104,7 @@ const SignUp = () => {
               userName: data.username,
               password: data.password,
               avatar: avatarUrl,
+              theme: "default",
             });
           }
         );
@@ -95,6 +114,7 @@ const SignUp = () => {
           userName: data.username,
           password: data.password,
           avatar: avatarUrl,
+          theme: "default",
         });
       }
 
@@ -103,9 +123,8 @@ const SignUp = () => {
       navigate("/");
     } catch (err) {
       console.error("Error in onSubmit:", err.message);
-      if (err.message.includes("email-already-in-use")) {
-        alert("Email already in use");
-        reset();
+      if (err.code === "auth/email-already-in-use") {
+        setEmailError("Email already in use");
       }
       dispatch(signupFailure(err.message));
     }
@@ -142,6 +161,8 @@ const SignUp = () => {
           {...register("username", { required: "Please enter username" })}
           placeholder={t("signUp.userNamePlaceholder")}
         />
+        <span className="error_text">{errors.username?.message}</span>
+
         <label htmlFor="email" className="title--form">
           {t("signUp.emailLabel")}
         </label>
@@ -152,6 +173,9 @@ const SignUp = () => {
           {...register("email", { required: "Please enter email" })}
           placeholder={t("signUp.emailPlaceholder")}
         />
+        <span className="error_text">
+          {errors.email?.message || emailError}
+        </span>
         <label htmlFor="password" className="title--form">
           {t("signUp.passwordLabel")}
         </label>
@@ -162,6 +186,7 @@ const SignUp = () => {
           {...register("password", { required: "Please enter password" })}
           placeholder={t("signUp.passwordPlaceholder")}
         />
+        <span className="error_text">{errors.password?.message}</span>
 
         <ButtonComponent type="submit" className="signUp_button">
           {t("signUp.signUpButton")}

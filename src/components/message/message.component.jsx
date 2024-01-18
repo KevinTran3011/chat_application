@@ -115,7 +115,7 @@ const Message = ({ message, currentUserId, conversationId, searchValue }) => {
                   ? "message_container--sender_text"
                   : "message_container--receiver_text"
               }
-              style={isHighlighted ? { backgroundColor: "yellow" } : {}}
+              style={isHighlighted ? { backgroundColor: "green" } : {}}
             >
               {message.text}
               {renderFile()}

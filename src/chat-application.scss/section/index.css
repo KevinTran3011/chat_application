@@ -229,7 +229,7 @@ body {
   padding: 15px;
 }
 .signUp_container .signUp_form {
-  gap: 15px;
+  gap: 8px;
   display: flex;
   align-items: center;
   flex-direction: column;

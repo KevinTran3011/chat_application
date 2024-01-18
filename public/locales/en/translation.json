@@ -4,7 +4,7 @@
     "prompt": "Select a contact to start a conversation with"
   },
   "sideBar": {
-    "header": "Chats",
+    "header": "Contacts",
     "search": "Search for contacts",
     "settings": "settings",
     "logOut": "Log out"
